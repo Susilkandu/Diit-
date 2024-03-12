@@ -1,0 +1,1202 @@
+@import url('https://fonts.googleapis.com/css2?family=Tiro+Devanagari+Hindi:ital@1&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Kotta+One&display=swap');
+
+html {
+    scrollbar-width: none !important;
+    scroll-behavior: smooth !important;
+}
+
+body::-webkit-scrollbar {
+    display: none !important;
+}
+
+:root {
+    --topNavBgColor: #00268f;
+    --mainBgcolor: #B2CBFF;
+    --mainBgcolorDark: #000;
+    --grayBgColor: #ececec;
+    --aboutBgColor: #012C57;
+    --darkRed: var(--orangeBG);
+    --texrColorOne: #06BBCC;
+    --cardHeadColor: #00268f;
+    --cardHeadColorDark: #00062B;
+    --orangeBG: #dd0101;
+    --orangeTextColor: #ff4500;
+    --my-border: 2px solid rgb(18, 73, 124) !important;
+    --borderColor: 2px solid rgb(18, 73, 124);
+    --gradientBlueBg: linear-gradient(180deg, rgba(9, 9, 121, 1) 0%, rgba(6, 73, 163, 1) 41%, rgb(111, 152, 212) 100%);
+    --MyDarkGrayBg: #0c0c0c;
+    --lightBlack: #232c3b;
+    --bg-with-pic-contact: linear-gradient(0deg, #3a4792c2, #232d6b97), url("/images/vender/contactBg.png") center;
+    --d-blue: #00268f;
+    --dark-blue2: #00062B !important;
+    --card-bg: #031E3B;
+    --card-bg2: #012C57;
+    --admHeadColor: rgb(240, 173, 78);
+    --course-bg: #f9d5b0 !important;
+    --computerBgCard: linear-gradient(0deg, #3a4792c2, #232d6b97), url("/images/thumbnails/book.png") center;
+    --BooksBgCard: linear-gradient(0deg, #3a4792c2, #232d6b97), url("/images/thumbnails/pc.jpg") center;
+    --EstablishmentBgCard: linear-gradient(0deg, #3a4792c2, #232d6b97), url("/images/vender/contactBg.png") center;
+}
+
+.DarkBlue {
+    background: #00062B;
+}
+
+#rightFeatureFinrst li {
+    color: yellow !important;
+}
+
+.fbColor {
+    background: #3b5998 !important;
+}
+
+/* Utility Classes */
+.bg-danger {
+    background: #FF1616 !important;
+}
+
+.bg-voilet {
+    background: #673BB7 !important;
+}
+
+.bg-primary {
+    background: #3d5ee1 !important;
+}
+
+.text-primary {
+    color: #3d5ee1 !important;
+}
+
+.textColorOne {
+    color: #ff4500;
+}
+
+.HindiFont {
+    font-family: 'Tiro Devanagari Hindi', serif;
+}
+
+.textColorOne {
+    color: #ff4500;
+}
+
+.transparentTableData {
+    background: transparent !important;
+}
+
+.myshadow {
+    box-shadow: 0 2px 5px -1px rgba(50, 50, 93, .25), 0 1px 3px -1px rgba(0, 0, 0, .3);
+}
+
+.myshadow2 {
+    box-shadow: 2px 2px 8px #88888888;
+}
+
+.smBtn {
+    width: 100px;
+    height: 30px;
+    background-color: #ff0066;
+    border-radius: 4px;
+    border-style: outset;
+    border-left: 1px solid gray;
+    border-top: 1px solid gray;
+    cursor: pointer;
+    color: White;
+}
+
+/* .hover-btn {
+    border-radius: 30px !important;
+    padding: 0.8rem 1rem;
+}
+
+.hover-btn img:hover {
+    border-radius: 30px !important;
+    background: skyblue;
+} */
+.hover-btn {
+    cursor: pointer;
+}
+
+.yellow-btn {
+    border-radius: 0 !important;
+    padding: 0.8rem 1rem;
+}
+
+
+.yellow-btn:hover {
+    background-color: rgb(5, 15, 107) !important;
+    transform: translateY(-2px) !important;
+    transition: all 0.2s linear;
+}
+
+.blink {
+    animation: amt 1s linear infinite;
+}
+
+@keyframes amt {
+    100% {
+        color: maroon;
+    }
+}
+
+.hoverTextBlue:hover {
+    color: blue;
+}
+
+.hoverTextOrange:hover {
+    color: orangered;
+}
+
+.text-orange {
+    color: orangered;
+}
+
+.hoverBtn:hover {
+    background-color: rgb(72, 174, 3) !important;
+    transform: translateY(-2px) !important;
+    transition: all 0.2s linear;
+}
+
+.myFlex {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: flex-start !important;
+    flex-direction: column !important;
+}
+
+.myFlex2 {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: flex-start !important;
+}
+
+.HeroMargin {
+    margin: 2rem 0;
+}
+
+.myPaddingMargin table td {
+    margin: 10px 2px !important;
+    padding: 10px 2px !important;
+}
+
+/* Dark mode Changer */
+.changer-container .changer-btn {
+    border: none !important;
+    outline: none !important;
+    background: transparent !important;
+
+}
+
+/* Toggle Sliders */
+.toggle {
+    position: relative;
+    display: flex;
+    width: 3rem;
+    justify-content: space-around;
+    height: 1.2rem;
+    border-radius: 20px;
+    border: 1px solid gray;
+    cursor: pointer !important;
+}
+
+.toggle i {
+    font-size: 0.7rem !important;
+}
+
+.switchChild {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-around !important;
+}
+
+.toggle:after {
+    content: "";
+    position: absolute;
+    width: 30%;
+    height: 80%;
+    border-radius: 50%;
+    background-color: gray;
+    top: 2px;
+    left: 5px;
+    transition: all 0.5s;
+}
+
+.checkbox:checked+.toggle::after {
+    left: 60%;
+}
+
+.toggle {
+    background-color: black;
+    /* margin-left: 2rem; */
+}
+
+.checkbox:checked+.toggle {
+    background-color: white;
+}
+
+/* **** *top Nav* ******** */
+#TopMarqueeNav {
+    height: 1.5rem;
+    background: var(--topNavBgColor);
+}
+
+.TopWelcomeNavLeft {
+    width: 10%;
+}
+
+.TopWelcomeCenter {
+    width: 50%;
+}
+
+.TopWelcomeNavRight {
+    width: 40%;
+    font-size: 0.9rem;
+}
+
+.nav-link2 {
+    text-decoration: none;
+    display: inline-block;
+    position: relative;
+}
+
+#logoImg {
+    width: 2.7rem;
+}
+
+/* Top Nav  */
+.TopWelcomeNavRight img {
+    width: 0.8rem !important;
+}
+
+#TopNavBar {
+    margin: 1.4rem 0 0;
+    background: 'var(--darkRed)';
+    font-size: 0.9rem !important;
+}
+
+#TopNavBar a {
+    color: white;
+    text-shadow: 0px 1px #000;
+}
+
+#TopNavBar i {
+    padding: 0 4px;
+    font-size: 1.1rem;
+}
+
+#studentZoneNav,
+#CourseListNav {
+    background: var(--darkRed);
+}
+
+#studentZoneNav a,
+#CourseListNav a {
+    padding: 10px;
+    color: white;
+    font-size: 0.9rem;
+}
+
+#studentZoneNav a:hover,
+#CourseListNav a:hover {
+    color: black !important;
+    text-shadow: none !important;
+}
+
+.my-dropdown-toggle::before {
+    content: none !important;
+}
+
+@media screen and (min-width:768px) {
+    .dropdown:hover .dropdown-menu {
+        display: block !important;
+    }
+}
+
+/* Carousel Section  */
+.MainCarousel {
+    margin-top: 0px !important;
+}
+
+/* Course section Start */
+.cardBoxShadow {
+    box-shadow: 0 2px 5px -1px rgba(50, 50, 93, .25), 0 1px 3px -1px rgba(0, 0, 0, .3);
+}
+
+#CourseContainer .card,
+#CourseContainer img {
+    border: none !important;
+    border-radius: 2px !important;
+}
+
+#CourseContainer div {
+    border: none !important;
+    margin: 0;
+    padding: 0;
+}
+
+#CourseContainer b {
+    color: blue;
+}
+
+/* About Section  */
+#BookCard h1,
+#ComputerCard h1,
+#Establishment h1 {
+    font-size: 4rem !important;
+}
+
+#aboutBgMain {
+    color: black;
+    font-weight: 500;
+}
+
+/* Gallary */
+.ZoomGallaryPic img {
+    transition: all 0.5s;
+    border-radius: 5px !important;
+}
+
+.ZoomGallaryPic img:hover {
+    transform: scale(1.03);
+    z-index: 999;
+}
+
+.ZoomCard {
+    transition: all 0.5s;
+    border-radius: 5px !important;
+}
+
+.ZoomCard:hover {
+    transform: scale(1.03);
+    z-index: 999;
+}
+
+/* Testimonial  */
+#carouselExampleInterval {
+    background: url("/images/vender/enquiryBg.png") no-repeat;
+    background-size: cover;
+}
+
+/* Feature and Updates */
+#liveCards .card {
+    border: none !important;
+    font-weight: normal !important;
+}
+
+.showFont {
+    display: none;
+    visibility: hidden;
+}
+
+#openingHour .table>:not(caption)>*>* {
+    color: blue !important;
+}
+
+/* Registation section */
+.rightCardBoys {
+    position: fixed;
+    right: -50px;
+    top: 30%;
+    transform: rotate(-40deg);
+    font-size: 2rem;
+}
+
+/* .rightCardBoys::before {
+    content: 'Hello';
+    transform: rotate(0deg) !important;
+    width: 100px;
+    height: 100px;
+    animation: amt 3s infinite;
+}
+ @keyframes amt {
+    50% {
+        color: green;
+    }
+    100% {
+        color: white;
+    }
+} */
+#RegistrationContainer {
+    background: linear-gradient(rgba(0, 0, 0, 0.8),
+            rgba(0, 0, 0, 0.8)), url(/images/vender/contactBg.png),
+        no-repeat center center;
+    background-size: cover;
+}
+
+#Myform {
+    background: var(--aboutBgColor);
+    border: 2px solid rgba(266, 255, 255, 0.9) !important;
+    backdrop-filter: blur(10px) !important;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.99) !important;
+}
+
+/* All Marquee Cod Beacouse Marquee not supported in SJX  */
+/* .marquee-container {
+    width: 100%;
+    overflow: hidden;
+    white-space: nowrap;
+} */
+
+.marquee {
+    animation: marquee 30s linear infinite;
+    display: inline-block;
+}
+
+@keyframes marquee {
+    0% { transform: translateX(100%); }
+    100% { transform: translateX(-100%); }
+}
+
+
+/* Course Marquee Slider  */
+#courseMarqueeSlide {
+    width: 100vw !important;
+    position: fixed !important;
+    bottom: 0 !important;
+    right: 0 !important;
+    left: 0 !important;
+    z-index: 999 !important;
+    padding: 0 !important;
+    margin: 0 !important;
+}
+
+#courseMarqueeSlide small {
+    border-right: 1px dotted rgb(0, 0, 0);
+    padding: 0 0.5rem !important;
+}
+
+/* Feature & Notish Board  */
+#FeaturesBackgroundColor1 {
+    background: var(--mainBgcolor);
+}
+
+#openingHour,
+#NotishBoard {
+    border: none !important;
+    box-shadow: 0 2px 2px #777;
+    transition: all 0.3s cubic-bezier(.25, .8, .25, 1);
+    border-radius: 4px !important;
+    color: black;
+    /* background-color: #fff; */
+}
+
+/* ********Swiper ************* */
+swiper-container {
+    width: 100%;
+    padding-top: 50px;
+    padding-bottom: 50px;
+}
+
+.swiper-slide {
+    background-position: center;
+    background-size: cover;
+    width: 300px !important;
+    height: 300px !important;
+}
+
+.swiper-slide img {
+    display: block;
+    width: 100%;
+}
+
+.swiper {
+    width: 100%;
+    padding-top: 50px;
+    padding-bottom: 50px;
+}
+
+.swiper-slide {
+    background-position: center;
+    background-size: cover;
+    width: 300px;
+    height: 300px;
+}
+
+.swiper-slide2 img {
+    display: block;
+    width: 100%;
+}
+
+.swiper-container2 {
+    width: 100%;
+    height: 100%;
+}
+
+.swiper-slide2 {
+    text-align: center;
+    font-size: 18px;
+    background: #29ff34 !important;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    -webkit-justify-content: flex-start;
+    justify-content: flex-start;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    -webkit-align-items: center;
+    align-items: center;
+}
+
+.swiper-slide2 img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Start Team section  */
+.bg-team {
+    /* background: linear-gradient(rgba(0, 0, 0, 0.8),
+            rgba(14, 15, 16, 0.933)),
+        url(pic/map2.png); */
+    background-size: cover;
+    background-position: center;
+}
+
+/*   Social Icons  */
+.social-icons {
+    position: fixed;
+    left: 0;
+    font-size: 1.7rem !important;
+    font-weight: normal !important;
+    bottom: 30% !important;
+    z-index: 9999;
+    color: #fff;
+    transition: 0.3s linear;
+}
+
+.social-icons a {
+    margin: 0.2rem 0;
+    display: flex;
+    align-items: center;
+    transition: 0.3s linear;
+    border-radius: 30px !important;
+}
+
+.social-icons a i {
+    padding: 0.2rem;
+    border-radius: 0 2px 2px 0 !important;
+    font-size: 1.7rem;
+}
+
+.social-icons .social-icons-one:hover,
+.social-icons .social-icons-two:hover,
+.social-icons .social-icons-three:hover {
+    cursor: pointer !important;
+    transition: 0.3s linear;
+    width: 180px;
+    padding: 0 0 0 10%;
+    display: flex;
+}
+
+.social-icons .my-fb,
+.social-icons .my-yt,
+.social-icons .my-wp {
+    display: none;
+}
+
+.social-icons a:hover .my-fb,
+.social-icons a:hover .my-yt,
+.social-icons a:hover .my-wp {
+    display: inline;
+}
+
+.social-icons .social-icons-one:hover {
+    background-color: #3d5af8;
+}
+
+.social-icons .social-icons-two:hover {
+    background-color: red;
+}
+
+.social-icons .social-icons-three:hover {
+    background-color: green;
+}
+
+.social-icons .social- #MyFooterColor .HoverIcons i {
+    box-shadow: 2px 2px 0 0 rgba(0, 0, 0, .5) !important;
+    border-color: rgba(0, 0, 0, .2);
+    border-radius: 2px;
+}
+
+.mysearch input {
+    width: 7rem !important;
+}
+
+.my-toast {
+    width: 14rem !important;
+    position: fixed !important;
+    bottom: 10% !important;
+    z-index: 999999;
+}
+
+.toast-container {
+    width: 200px;
+}
+
+.show-toast {
+    display: none !important;
+}
+
+#btnBackToTop::after {
+    content: '';
+    border-radius: 100%;
+    border: 6px solid #00FFCB;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    animation: ring 1.5s infinite;
+}
+
+@keyframes ring {
+    0% {
+        width: 30px;
+        height: 30px;
+        opacity: 1;
+    }
+
+    100% {
+        width: 100px;
+        height: 100px;
+        opacity: 0;
+    }
+}
+
+/* Thuumblain  */
+#thumblain {
+    height: 7rem;
+    background: #00062B;
+}
+
+#thumblain swiper-slide {
+    display: flex;
+    align-items: start;
+    justify-content: flex-start;
+    height: 100px !important;
+    width: auto !important;
+    margin: 1rem !important;
+}
+
+#thumblain img {
+    width: 8rem;
+    border: 2px solid white !important;
+    border-radius: 10px !important;
+}
+
+/* footer  */
+footer {
+    margin-bottom: 1.5rem;
+    font-weight: normal;
+}
+
+footer b {
+    color: orange !important;
+}
+
+footer i {
+    font-style: normal !important;
+    font-weight: normal !important;
+}
+
+footer img {
+    width: 1.2rem;
+}
+
+footer td,
+footer li {
+    border: none !important;
+    background: transparent !important;
+    color: white !important;
+    font-size: 0.9rem;
+}
+
+.mytable .ms-1:hover,
+.mytable #address1:hover,
+.mytable #address2:hover {
+    color: rgba(255, 255, 255, 0.802) !important;
+}
+
+/* Admission  */
+.mainRegContainer label {
+    font-size: 0.9rem;
+}
+
+.mainRegContainer label span {
+    font-size: 0.7rem;
+}
+
+.mainRegContainer label {
+    font-weight: 700;
+}
+
+.validCheck:valid+.icon::after {
+    font-size: 1.5rem;
+    content: '😍';
+}
+
+.validCheck:invalid+.icon::after {
+    font-size: 1.5rem;
+    content: '😳' !important;
+}
+
+form span,
+::placeholder {
+    color: #555 !important;
+    font-size: 0.8rem;
+}
+
+.mainRegContainer i {
+    border-radius: 10px 0 0 10px;
+    border: 1px solid #cbcaca;
+    border-right: none;
+    color: maroon;
+    font-weight: bolder !important;
+}
+
+.mainRegContainer input {
+    border-radius: 0 10px 10px 0;
+    border: 1px solid #cbcaca;
+    border-left: none;
+}
+
+.mainRegContainer select {
+    border-radius: 0 10px 10px 0 !important;
+    border: 1px solid rgb(198, 198, 198);
+    border-left: none;
+}
+
+.contactForm input,
+.contactForm textarea {
+    background: #a9a9a952 !important;
+
+}
+
+.contactForm ::placeholder {
+    color: rgb(136, 136, 136) !important;
+
+}
+
+/* Diploma Course */
+
+#course {
+    background: var(--bg-color4);
+}
+
+#VerificationHeader {
+    position: absolute;
+    left: 50%;
+    top: 5.3rem;
+    transform: translate(-50%, -50%);
+    z-index: 99;
+}
+
+.visible {
+    visibility: visible;
+}
+
+.hidden {
+    visibility: hidden !important;
+}
+
+#PrintResult table tr th,
+#PrintResult table tr td {
+    padding: 10px !important;
+}
+
+#myDiplomaHeader {
+    box-shadow: 2px 2px 8px #888888 !important;
+    position: fixed;
+    left: 50%;
+    top: 3rem;
+    transform: translate(-50%, -50%);
+    z-index: 99;
+}
+
+#diplomaBody .TopWelcomeNavLeft {
+    width: 5rem;
+}
+
+#diplomaBody {
+    background: var(--body-color);
+}
+
+.table-bordered>:not(caption)>* {
+    color: rgb(97, 97, 97);
+}
+
+#mainContainer {
+    /* color: white !important; */
+    font-size: 1.2rem;
+    box-shadow: 2px 2px 8px #888888;
+    margin-top: 1rem;
+    /* background: white; */
+}
+
+.diplomaTable table th {
+    color: white;
+    background: url("/images/vender/line.gif") !important;
+    background-repeat: repeat-x;
+}
+
+.table-bordered>:not(caption)>* {
+    padding: 0.5rem;
+}
+
+.diplomaTable {
+    font-size: 1rem;
+}
+
+.diplomaTable .my-row-color {
+    font-size: 0.8rem;
+}
+
+.headText {
+    font-size: 1.4rem;
+    text-align: center;
+}
+
+/* Language Section  */
+#LanguageContainer table th {
+    background: url("/images/vender/line.gif") !important;
+    color: white;
+}
+
+/* Doeacc Course  */
+#DoeaccCourse td:hover {
+    color: orangered !important;
+}
+
+#DoeaccLeftCourse {
+    height: 650px;
+    overflow-y: scroll !important;
+}
+
+#MainLanguageSection table td,
+.DoeaccCourseContainer .diplomaTable table td {
+    padding: 0.5rem 1rem !important;
+}
+
+#DoeaccCourse span {
+    font-size: 0.8rem;
+}
+
+.DoeaccCourseLeftTable th {
+    color: var(--orangeTextColor);
+}
+
+.DoeaccCourseLeftTable span {
+    color: var(--orangeTextColor);
+}
+
+/* Wev developmet course  */
+#WebLeftCourse {
+    height: 750px;
+    overflow-y: scroll !important;
+}
+
+/* Term & condition */
+#conditions ul li {
+    padding: 10px 0;
+}
+
+.diplomaData .mainContainer table td {
+    padding: 20px !important;
+}
+
+/* Admin pannel  */
+.amtWheel {
+    animation: anmt 1s linear infinite;
+}
+
+@keyframes anmt {
+    100% {
+        transform: rotate(360deg);
+    }
+
+}
+
+#AdminProfile label {
+    font-weight: bolder !important;
+    color: #0033ff;
+}
+
+#adminBodyBgColor {
+    background: #f1f5f9 !important;
+    background: var(--grayBgColor);
+}
+
+#adminHeader {
+    height: 4.5rem !important;
+}
+
+#adminHeader ::placeholder {
+    font-size: 0.9rem;
+    color: gray;
+}
+
+#adminHeader input,
+#adminHeader input:hover {
+    border: none;
+    outline: none;
+}
+
+.accordion-collapse button {
+    margin: 6px 0;
+    background: #d0d9ff;
+}
+
+.accordion-collapse button:hover {
+    margin: 6px 0;
+    background: #0033ff;
+    color: white;
+}
+
+#AdminCard {
+    border-radius: 0 !important;
+}
+.DataBsHead{
+    color: rgb(63, 63, 255) !important ;
+    text-align: center;
+}
+.widget-stat {
+    transition: all .3s;
+}
+
+.widget-stat:hover {
+    transform: translatey(-5px);
+}
+
+.widget-stat .media {
+    display: flex;
+}
+
+.widget-stat .media>span {
+    background: #F5F7FB;
+    height: 60px;
+    width: 60px;
+    border-radius: 50%;
+    padding: 10px 12px;
+    border: 1px solid #E6E8ED;
+    font-size: 25px;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    color: #0049f2;
+}
+
+.accordianShadowHover:hover {
+    box-shadow: 0 2px 5px 0 rgb(0 0 0 / 16%), 0 2px 10px 0 rgb(0 0 0 / 12%);
+}
+
+/* Result */
+#printResult .HeaderCenter h1 {
+    font-size: 4em;
+}
+
+#printResult .AllCoursseContent li {
+    list-style-type: none !important;
+    padding: 0 5px;
+}
+
+/* StudentDataBase */
+#StudentDataBase tr,
+#StudentDataBase th,
+#StudentDataBase td {
+    padding: 4px !important;
+}
+
+#StudentDataBase thead tbody {
+    padding: 1rem !important;
+}
+
+
+/* .cccc {
+    background: linear-gradient(#3265ce7a, #3366cf38);
+    border: 1px solid #7495db8c;
+    border-bottom: 3px solid #5881d433;
+    box-shadow: 0 3px 1px #ededed;
+} */
+
+#captcha {
+    background: #3D5EE1;
+
+}
+
+/* .searchCard{
+background: linear-gradient(to left, #283593, #1976d2);
+
+} */
+.cardEffectsBorder {
+    border: 2px solid rgba(255, 255, 255, 0.157);
+    box-shadow: 0 0 80px rgba(0, 0, 0, 0.2);
+    overflow: hidden;
+    border-radius: 10px;
+}
+
+.cardEffects {
+    background: rgba(255, 255, 255, 0.089);
+    backdrop-filter: blur(10px);
+
+}
+
+/* ---------ProgramData---------------- */
+/* #ProgramData {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+} */
+
+
+
+/* Loader styles */
+.loader-container {
+    position: fixed;
+    top: 4rem;
+    left: 0;
+    width: 100%;
+    height: 4px;
+    background-color: #d3d3d3;
+    overflow: hidden;
+    z-index: 9999 !important;
+}
+
+.loader-bar {
+    height: 100%;
+    width: 100%;
+    background-color: #1877f2;
+    animation: loaderAnimation 2s linear;
+    animation-fill-mode: forwards;
+    z-index: 9999 !important;
+
+}
+
+@keyframes loaderAnimation {
+    0% {
+        width: 0;
+    }
+
+    50% {
+        width: 50%;
+    }
+
+    100% {
+        width: 100%;
+    }
+}
+
+
+/* PageNot Found  */
+.BadLine {
+    font-size: 9rem;
+    line-height: 11rem;
+    font-weight: 800;
+    color: #2699fb;
+}
+
+
+
+.carousel-background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    /* z-index: 1;  */
+}
+
+.accordion-button.active {
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+
+.databsimg img {
+    transition: transform 0.3s ease-in-out;
+    z-index: 999;
+}
+
+.databsimg:hover img {
+    border-radius: 0 !important;
+    transform: scale(3);
+}
+
+/* Tooltip  */
+/* CSS for tooltip */
+/* CSS for tooltip */
+.custom-tooltip::after {
+    content: attr(title);
+    position: absolute;
+    background-color: rgba(0, 0, 0, 0.8);
+    color: white;
+    padding: 8px 12px;
+    border-radius: 6px;
+    z-index: 1;
+    visibility: hidden;
+    white-space: nowrap;
+}
+
+/* CSS to show tooltip on hover */
+.custom-tooltip:hover::after {
+    visibility: visible;
+}
+
+/* Loader  */
+.preloader-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+    transition: opacity 0.3s;
+    opacity: 0;
+    pointer-events: none;
+}
+
+.preloader-container.active {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.youtube-loader {
+    position: relative;
+    width: 80px;
+    height: 80px;
+}
+
+.spinner {
+    position: absolute;
+    border: 4px solid transparent;
+    border-top-color: #ff0000;
+    /* Red */
+    border-radius: 50%;
+    width: 64px;
+    height: 64px;
+    animation: rotate 1s linear infinite;
+}
+
+.red {
+    animation-delay: -0.5s;
+}
+
+.blue {
+    border-top-color: #0057e7;
+    /* Blue */
+}
+
+@keyframes rotate {
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+
+

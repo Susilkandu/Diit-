@@ -1,0 +1,135 @@
+@media screen and (max-width:910px) {
+    .TopWelcomeNavLeft {
+        width: 20%;
+    }
+
+    .TopWelcomeNavRight {
+        width: 90%;
+        font-size: 0.9rem;
+    }
+
+
+
+    #printResult img {
+        max-width: 100%;
+        height: auto;
+    }
+
+
+    #printResult .HeaderRight p {
+        font-size: 0.8em;
+
+    }
+
+}
+
+@media screen and (max-width:768px) {
+    /* #carouselExampleAutoplaying img {
+        height: 30vh !important;
+        .TopWelcomeNavLeft {
+            width: 10%;
+        }
+    } */
+
+    #printResult .header h1 {
+        font-size: 2.4em;
+    }
+
+    #printResult .header p {
+        font-size: 0.8;
+    }
+
+    #printResult p,
+    #printResult ul li {
+        font-size: 0.9em;
+    }
+
+    #printResult img {
+        max-width: 80%;
+        height: auto;
+    }
+
+    .TopWelcomeCenter {
+        display: none !important;
+        visibility: hidden !important;
+    }
+
+    .TopWelcomeNavRight {
+        width: 90%;
+        font-size: 0.7rem;
+    }
+
+    #navbarNav ul {
+        padding-bottom: 1rem;
+    }
+
+    .hideFont {
+        display: none;
+        visibility: hidden;
+    }
+
+    .showFont {
+        display: block !important;
+        visibility: visible !important;
+        color: black;
+    }
+
+    .social-icons {
+        display: none !important;
+    }
+
+    footer {
+        margin-bottom: 2.8rem !important;
+    }
+
+    .diplomaTable th,
+    #MainLanguageSection table th {
+        font-size: 1rem;
+    }
+
+    .diplomaTable .my-row-color th,
+    #MainLanguageSection .my-row-color th {
+        font-size: 0.6rem;
+    }
+
+    .diplomaTable .container-fluid td,
+    #MainLanguageSection .container-fluid td,
+    .DoeaccCourseContainer .diplomaTable table td {
+        font-size: 0.7rem;
+    }
+
+    .aboutMainImg .MainCarousel img {
+        height: 300px !important;
+    }
+    .AddmissionDataAdmin{
+        margin: 23rem 0 !important;
+    } 
+}
+
+@media screen and (max-width:410px) {
+    #shortContact a {
+        font-size: 13px !important;
+    }
+    
+    #BranchTypingText {
+        font-size: 1.1rem !important;
+    }
+    
+    #printResult .header h1 {
+        font-size: 0.7em;
+    }
+
+    #printResult p {
+        font-size: 0.4em;
+    }
+    
+    #printResult img {
+        max-width: 80%;
+        height: auto;
+    }
+    .AddmissionDataAdmin{
+        margin: 23rem 0 !important;
+    }
+}
+
+
