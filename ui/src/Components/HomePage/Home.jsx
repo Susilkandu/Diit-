@@ -3,8 +3,8 @@ import { useNavigate } from "react-router-dom";
 import React from 'react';
 import Typed from 'typed.js';
 import { toast } from 'react-toastify';
-import { UniversalContext } from "../../context/universal";
 import 'react-toastify/dist/ReactToastify.css';
+import { UniversalContext } from "../../context/universal";
 import { Link } from "react-router-dom";
 import TopCourseList from "../TopCourse/TopCourseList";
 import enquiryBg from "/images/vender/enquiryBg.png";
@@ -417,9 +417,9 @@ function Home() {
                                         <textarea className="form-control" rows="3"
                                             placeholder="Type Your Enquiry*" value={query} onChange={(event) => { setQuery(event.target.value) }}></textarea>
                                     </div>
-                                    <div className="col-12 my-1 text-center">
-                                        <button className="btn fw-medium text-white hoverBtn" style={{ background: 'orangered' }}>
-                                            <i className="bi bi-send-fill " onClick={() => { sendQuery() }}></i>Send </button>
+                                    <div className="col-12 my-1 text-center" >
+                                        <button className="btn fw-medium text-white hoverBtn" style={{ background: 'orangered' }} onClick={sendQuery}>
+                                            <i className="bi bi-send-fill "></i>Send </button>
                                     </div>
                                 </div>
                             </div>

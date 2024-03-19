@@ -19,8 +19,20 @@ const fetchStudentList = async () => {
             }
         })
 }
+const fetchNotice = async()=>{
+    await fetchNotice('http://localhost:3000/admin/notice',{
+        headers: {
+            'Authorization': localStorage.getItem('aJwt')
+        }
+    }).then(data=>data.json())
+    .then((data)=>{
+        return data;
+    }).catch((error)=>{
+        return error;
+    })
+}
 const hell = 'jkl';
 export{
     fetchStudentList,
-    hell
+    fetchNotice
 }

@@ -1,4 +1,6 @@
-const { student, enquiry } = require('../Model/student')
+const { student, enquiry } = require('../Model/student');
+const {course} = require("../Model/admin");
+const Course= course;
 const studentRegistration = (async (req, res) => {
   try {
     const { photo, name, fatherName, motherName, gender, address, mobileNumber, dob, course, category } = req.body;
@@ -9,11 +11,22 @@ const studentRegistration = (async (req, res) => {
       const studentData = new student({
         photo, name, fatherName, motherName, gender, address, mobileNumber, dob, course, category
       });
-      await studentData.save().then(() => {
-        res.json({ message: 'Registration Succussfull' });
-      }).catch((err) => {
-        console.log(err)
-        return res.json({ message: err });
+      
+       await Course.findOne({ name: course }).then(async(crs)=>{
+        if(!crs){
+          return res.json({message:"Course Does Not Found"})
+        }
+        else{
+          await studentData.save().then(() => {
+            res.json({ message: 'Registration Succussfull' });
+          }).catch((err) => {
+            console.log(err)
+            return res.json({ message: err });
+          })
+        }
+      }).catch((error)=>{
+        console.log(error);
+        return res.json({message:err})  ;
       })
     }
   } catch (error) {

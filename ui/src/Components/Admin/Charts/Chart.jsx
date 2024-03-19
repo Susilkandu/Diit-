@@ -1,12 +1,67 @@
 import React, { useEffect, useState } from 'react';
+import { toast } from 'react-toastify';
 import Chart from 'chart.js/auto';
-
 const StudentChart = (props) => {
     // console.log(props)
     const [barChart, setBarChart] = useState(null);
     const [pieChart, setPieChart] = useState(null);
+    const [query, setQuery] = useState([]);
 
+    const getAllQuery = async () => {
+        await fetch('http://localhost:3000/admin/getAllQuery', {
+            method: 'get',
+            headers: {
+                'Authorization': localStorage.getItem('aJwt')
+            }
+        }).then(data => data.json())
+            .then((data) => {
+                if (!data.error) {
+                    setQuery(data);
+                }
+                else {
+                    toast.error(data.error);
+                }
+            })
+    }
+    const deleteQuery = async (_id) => {
+        await fetch(`http://localhost:3000/admin/deleteQuery/${_id}`, {
+            method: 'delete',
+            headers: {
+                'Authorization': localStorage.getItem('aJwt')
+            }
+        }).then(data => data.json())
+            .then((data) => {
+                if (!data.error) {
+                    getAllQuery();
+                }
+                else {
+                    toast.error(data.error);
+                }
+            })
+    }
+    const doSolve = async (_id) => {
+        await fetch(`http://localhost:3000/admin/updateIQueryStatus`, {
+            method: 'put',
+            headers: {
+                'Authorization': localStorage.getItem('aJwt'),
+                "Content-type": "application/json"
+            },
+            body: JSON.stringify({
+                _id: _id
+            })
+        }).then(data => data.json())
+            .then((data) => {
+                if (!data.error) {
+                    getAllQuery();
+                    toast.success(data);
+                }
+                else {
+                    toast.error(data.error);
+                }
+            })
+    }
     useEffect(() => {
+        getAllQuery();
         const Total = Array.isArray(props.std) ? props.std.length : 0;
 
         // Create or update the bar chart
@@ -96,25 +151,42 @@ const StudentChart = (props) => {
                         </div>
                     </div>
 
-                    <div className="col-xl-4 col-xxl-3 col-sm-6 my-1">
+                    <div className="col-xl-4 col-xxl-3 col-sm-6 my-1 w-100">
                         <div className="card myshadow border-0" id="NotishBoard">
                             <div className="card-header h4 text-white text-start" style={{ background: "var(--cardHeadColor )" }}>
                                 <div data-aos="fade-right">  <i className="fa fa-comments text-warning" aria-hidden="true"></i> NEW MESSAGE</div>
                             </div>
                             <div className="card-body fw-normal FeatureCard2 my-0 py-0">
-                                <marquee direction="up" scrollamount="3" behavior="scroll">
-                                    <small>[1].
-                                        Course certified by Microsoft.
-                                        <img src="images/icon/gifPic.gif" className="img-fluid" width="40px" />
-                                    </small>
-                                    <hr width="90%" /> <small>[2]. CCC free on  ADCA course</small>
-                                    <img src="images/icon/gifPic.gif" className="img-fluid" width="40px" />
-                                    <hr width="90%" /> <small>[5]. Free English Speaking & Personality Development classNames</small>
-                                    <img src="images/icon/gifPic.gif" className="img-fluid" width="40px" />
-                                    <hr width="90%" /> <small className="HindiFont">[6]. प्रत्येक पाठ्यक्रम के पूरा होने पर नि: शुल्क
-                                        प्रमाण
-                                        पत्र। </small>
-                                </marquee>
+                                <table>
+                                    <tr>
+                                        <th>Title</th>
+                                        <th>Query</th>
+                                        <th>Name</th>
+                                        <th>Mobile</th>
+                                        <th>Email</th>
+                                        <th>Solved</th>
+                                        <th>Date</th>
+                                        <th>Delete</th>
+                                    </tr>
+                                    {
+                                        query && query.map((details) => {
+                                            return (
+                                                <tr>
+                                                    <td>{details.title}</td>
+                                                    <td>{details.query}</td>
+                                                    <td>{details.fullName}</td>
+                                                    <td>{details.mobile}</td>
+                                                    <td>{details.email}</td>
+                                                    <td>{details.iSolveStatus == true ? 'Yes' : (<button className='btn btn-succuss' onClick={() => { doSolve(details._id) }}><i className="bi bi-pencil-square"></i></button>)}</td>
+                                                    <td>{details.createdAt}</td>
+                                                    <td onClick={() => { deleteQuery(details._id) }}>
+                                                        <button className='btn btn-danger'><i className="bi bi-trash3-fill"></i></button>
+                                                    </td>
+                                                </tr>
+                                            )
+                                        })
+                                    }
+                                </table>
                             </div>
                         </div>
                     </div>

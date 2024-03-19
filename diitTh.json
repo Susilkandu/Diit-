@@ -1,0 +1,589 @@
+{
+    "client": "Thunder Client",
+    "collectionName": "drishteeIndia",
+    "dateExported": "2023-12-28T08:45:15.493Z",
+    "version": "1.1",
+    "folders": [
+        {
+            "_id": "77bf9d3a-33fb-4c4a-bfd9-ca1e088301b2",
+            "name": "admin",
+            "containerId": "",
+            "created": "2023-12-14T16:12:44.578Z",
+            "sortNum": 10000
+        }
+    ],
+    "requests": [
+        {
+            "_id": "999732d9-b817-4561-ad0a-2a4a00a070c5",
+            "colId": "6605d8d9-13f4-46c9-b6ef-5a90cbc0e544",
+            "containerId": "",
+            "name": "studentRegistration",
+            "url": "http://localhost:3000/studentRegistration",
+            "method": "POST",
+            "sortNum": 10000,
+            "created": "2023-12-14T16:12:44.578Z",
+            "modified": "2023-12-14T16:12:44.578Z",
+            "headers": [
+                {
+                    "name": "Accept",
+                    "value": "*/*",
+                    "isDisabled": true
+                },
+                {
+                    "name": "User-Agent",
+                    "value": "Thunder Client (https://www.thunderclient.com)",
+                    "isDisabled": true
+                }
+            ],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"photo\":\"https://avatars.githubusercontent.com/u/127728406?v=4\",\n  \"name\":\"Sushil Kandu\",\n  \"fatherName\":\"Nandlal Kandu\",\n  \"motherName\":\"Rambha Devi\",\n  \"gender\":\"male\",\n  \"address\":\"village:- Togri, Post:-Nichlaul, dist-Maharajganj \",\n  \"mobileNumber\":\"7267995307\",\n  \"dob\":\"2003-05-15\",\n  \"course\":\"ADCA+\",\n  \"category\":\"obc\"\n}\n",
+                "form": []
+            },
+            "tests": []
+        },
+        {
+            "_id": "eb9973e4-305c-4520-8caa-a88a171a600a",
+            "colId": "6605d8d9-13f4-46c9-b6ef-5a90cbc0e544",
+            "containerId": "77bf9d3a-33fb-4c4a-bfd9-ca1e088301b2",
+            "name": "pushNotice",
+            "url": "http://localhost:3000/admin/pushNotice",
+            "method": "POST",
+            "sortNum": 30000,
+            "created": "2023-12-14T16:12:44.580Z",
+            "modified": "2023-12-14T16:12:44.580Z",
+            "headers": [
+                {
+                    "name": "Content-Type",
+                    "value": "application/json"
+                },
+                {
+                    "name": "Authorization",
+                    "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NTY2MWE1ZTRiOGNmOWQ5MWMzMzFmNTUiLCJpYXQiOjE3MDExOTA2Mjd9.Zr6iRRajiUryLufBuxIlZDpkgn8ijCfv2JF61CD82lY"
+                },
+                {
+                    "name": "Accept",
+                    "value": "*/*",
+                    "isDisabled": true
+                },
+                {
+                    "name": "User-Agent",
+                    "value": "Thunder Client (https://www.thunderclient.com)",
+                    "isDisabled": true
+                }
+            ],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"title\":\"Chatth Offer\",\n  \"nMessage\":\"99% off on DCAA Registration \"\n}",
+                "form": []
+            },
+            "tests": []
+        },
+        {
+            "_id": "7fcea753-a6e1-4af7-a5a4-78df48ec8d14",
+            "colId": "6605d8d9-13f4-46c9-b6ef-5a90cbc0e544",
+            "containerId": "77bf9d3a-33fb-4c4a-bfd9-ca1e088301b2",
+            "name": "getAllNotice",
+            "url": "http://localhost:3000/admin/getAllNotice",
+            "method": "GET",
+            "sortNum": 50000,
+            "created": "2023-12-14T16:12:44.581Z",
+            "modified": "2023-12-14T16:12:44.581Z",
+            "headers": [
+                {
+                    "name": "Accept",
+                    "value": "*/*",
+                    "isDisabled": true
+                },
+                {
+                    "name": "User-Agent",
+                    "value": "Thunder Client (https://www.thunderclient.com)",
+                    "isDisabled": true
+                }
+            ],
+            "params": [],
+            "tests": []
+        },
+        {
+            "_id": "b846e273-cd1f-4ff0-9167-b9e43ddd7ad8",
+            "colId": "6605d8d9-13f4-46c9-b6ef-5a90cbc0e544",
+            "containerId": "77bf9d3a-33fb-4c4a-bfd9-ca1e088301b2",
+            "name": "getStudentList",
+            "url": "http://localhost:3000/admin/studentList",
+            "method": "GET",
+            "sortNum": 60000,
+            "created": "2023-12-14T16:12:44.579Z",
+            "modified": "2023-12-14T16:12:44.579Z",
+            "headers": [
+                {
+                    "name": "Authorization",
+                    "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NTU5YzY2ODIzMDQ5YjliMDE5ODRmYjkiLCJpYXQiOjE3MDAzODIzMTJ9.qqjqvZDYssaCZpRgznlihh0ZSOLsKVhEY3PioahceAk"
+                },
+                {
+                    "name": "Accept",
+                    "value": "*/*",
+                    "isDisabled": true
+                },
+                {
+                    "name": "User-Agent",
+                    "value": "Thunder Client (https://www.thunderclient.com)",
+                    "isDisabled": true
+                }
+            ],
+            "params": [],
+            "tests": []
+        },
+        {
+            "_id": "433d051c-84fc-4c63-8b61-cbf89c5579f4",
+            "colId": "6605d8d9-13f4-46c9-b6ef-5a90cbc0e544",
+            "containerId": "",
+            "name": "sendQuery",
+            "url": "http://localhost:3000/queryNow",
+            "method": "POST",
+            "sortNum": 60000,
+            "created": "2023-12-14T16:12:44.582Z",
+            "modified": "2023-12-14T16:12:44.582Z",
+            "headers": [
+                {
+                    "name": "Content-Type",
+                    "value": "application/json"
+                },
+                {
+                    "name": "Accept",
+                    "value": "*/*",
+                    "isDisabled": true
+                },
+                {
+                    "name": "User-Agent",
+                    "value": "Thunder Client (https://www.thunderclient.com)",
+                    "isDisabled": true
+                }
+            ],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"fullName\":\"Sushil Kandu\",\n  \"mobile\":\"6394521336\",\n  \"email\":\"youfriendy324@gmail.com\",\n  \"title\":\"Do it\",\n  \"query\":\"I am world Economic Power so do my work hurry Up\"\n}",
+                "form": []
+            },
+            "tests": []
+        },
+        {
+            "_id": "ba4115e7-1f4a-475e-b76d-ed8a6bd2a169",
+            "colId": "6605d8d9-13f4-46c9-b6ef-5a90cbc0e544",
+            "containerId": "77bf9d3a-33fb-4c4a-bfd9-ca1e088301b2",
+            "name": "addAdmin",
+            "url": "http://localhost:3000/admin/addAdmin",
+            "method": "POST",
+            "sortNum": 70000,
+            "created": "2023-12-14T16:12:44.583Z",
+            "modified": "2023-12-14T16:32:58.309Z",
+            "headers": [
+                {
+                    "name": "Content-Type",
+                    "value": "application/json"
+                },
+                {
+                    "name": "Accept",
+                    "value": "*/*",
+                    "isDisabled": true
+                },
+                {
+                    "name": "User-Agent",
+                    "value": "Thunder Client (https://www.thunderclient.com)",
+                    "isDisabled": true
+                }
+            ],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"name\":\"Sushil Kandu\",\n  \"email\":\"youfriendy32f7@gmail.com\",\n  \"profilePic\":\"something\",\n  \"dob\":\"10-07-2004\",\n  \"mobileNumber\":\"6394521336\",\n  \"password\":\"hello\",\n  \"root\":false\n}",
+                "form": []
+            },
+            "tests": []
+        },
+        {
+            "_id": "a831675e-036b-49fe-8c17-e3e3872d9d23",
+            "colId": "6605d8d9-13f4-46c9-b6ef-5a90cbc0e544",
+            "containerId": "77bf9d3a-33fb-4c4a-bfd9-ca1e088301b2",
+            "name": "loginAdmin",
+            "url": "http://localhost:3000/admin/login",
+            "method": "POST",
+            "sortNum": 80000,
+            "created": "2023-12-14T16:12:44.584Z",
+            "modified": "2023-12-14T16:33:15.742Z",
+            "headers": [
+                {
+                    "name": "Content-Type",
+                    "value": "application/json"
+                },
+                {
+                    "name": "Accept",
+                    "value": "*/*",
+                    "isDisabled": true
+                },
+                {
+                    "name": "User-Agent",
+                    "value": "Thunder Client (https://www.thunderclient.com)",
+                    "isDisabled": true
+                }
+            ],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"email\":\"youfriendy32f7@gmail.com\",\n  \"password\":\"hello\"\n}",
+                "form": []
+            },
+            "tests": []
+        },
+        {
+            "_id": "79fe1f5b-c462-4228-a8bf-d92703fba507",
+            "colId": "6605d8d9-13f4-46c9-b6ef-5a90cbc0e544",
+            "containerId": "77bf9d3a-33fb-4c4a-bfd9-ca1e088301b2",
+            "name": "updateNotice",
+            "url": "http://localhost:3000/admin/updateNotice",
+            "method": "PUT",
+            "sortNum": 90000,
+            "created": "2023-12-14T16:12:44.585Z",
+            "modified": "2023-12-14T16:22:15.672Z",
+            "headers": [
+                {
+                    "name": "Authorization",
+                    "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NTU5YzY2ODIzMDQ5YjliMDE5ODRmYjkiLCJpYXQiOjE3MDAzODIzMTJ9.qqjqvZDYssaCZpRgznlihh0ZSOLsKVhEY3PioahceAk"
+                },
+                {
+                    "name": "Accept",
+                    "value": "*/*",
+                    "isDisabled": true
+                },
+                {
+                    "name": "User-Agent",
+                    "value": "Thunder Client (https://www.thunderclient.com)",
+                    "isDisabled": true
+                }
+            ],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "  {\n    \"_id\": \"657204ef50791707e42c6690\",\n    \"title\": \"Mega Chatth Offer\",\n    \"nMessage\": \"97% off Any Student Registration \"\n  }",
+                "form": []
+            },
+            "tests": []
+        },
+        {
+            "_id": "8e078019-ea63-4cb3-b250-cafb949dfb24",
+            "colId": "6605d8d9-13f4-46c9-b6ef-5a90cbc0e544",
+            "containerId": "77bf9d3a-33fb-4c4a-bfd9-ca1e088301b2",
+            "name": "deleteNotice",
+            "url": "http://localhost:3000/admin/deleteNotice/657204ef50791707e42c6690",
+            "method": "DELETE",
+            "sortNum": 100000,
+            "created": "2023-12-14T16:12:44.586Z",
+            "modified": "2023-12-14T16:22:23.301Z",
+            "headers": [
+                {
+                    "name": "Authorization",
+                    "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NTU5YzY2ODIzMDQ5YjliMDE5ODRmYjkiLCJpYXQiOjE3MDAzODIzMTJ9.qqjqvZDYssaCZpRgznlihh0ZSOLsKVhEY3PioahceAk"
+                },
+                {
+                    "name": "Accept",
+                    "value": "*/*",
+                    "isDisabled": true
+                },
+                {
+                    "name": "User-Agent",
+                    "value": "Thunder Client (https://www.thunderclient.com)",
+                    "isDisabled": true
+                }
+            ],
+            "params": [],
+            "tests": []
+        },
+        {
+            "_id": "98ac478d-1143-43be-b71f-c347f457795e",
+            "colId": "6605d8d9-13f4-46c9-b6ef-5a90cbc0e544",
+            "containerId": "77bf9d3a-33fb-4c4a-bfd9-ca1e088301b2",
+            "name": "getAllQuery",
+            "url": "http://localhost:3000/admin/getAllQuery",
+            "method": "GET",
+            "sortNum": 110000,
+            "created": "2023-12-14T16:12:44.608Z",
+            "modified": "2023-12-14T16:12:44.608Z",
+            "headers": [
+                {
+                    "name": "Authorization",
+                    "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NTU5YzY2ODIzMDQ5YjliMDE5ODRmYjkiLCJpYXQiOjE3MDAzODIzMTJ9.qqjqvZDYssaCZpRgznlihh0ZSOLsKVhEY3PioahceAk"
+                },
+                {
+                    "name": "Accept",
+                    "value": "*/*",
+                    "isDisabled": true
+                },
+                {
+                    "name": "User-Agent",
+                    "value": "Thunder Client (https://www.thunderclient.com)",
+                    "isDisabled": true
+                }
+            ],
+            "params": [],
+            "tests": []
+        },
+        {
+            "_id": "02db5297-3613-4a63-888b-1e3295a79fd7",
+            "colId": "6605d8d9-13f4-46c9-b6ef-5a90cbc0e544",
+            "containerId": "77bf9d3a-33fb-4c4a-bfd9-ca1e088301b2",
+            "name": "updateIQueryStatus",
+            "url": "http://localhost:3000/admin/updateIQueryStatus/",
+            "method": "PUT",
+            "sortNum": 120000,
+            "created": "2023-12-14T16:12:44.609Z",
+            "modified": "2023-12-14T16:24:02.449Z",
+            "headers": [
+                {
+                    "name": "Authorization",
+                    "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NTU5YzY2ODIzMDQ5YjliMDE5ODRmYjkiLCJpYXQiOjE3MDAzODIzMTJ9.qqjqvZDYssaCZpRgznlihh0ZSOLsKVhEY3PioahceAk"
+                },
+                {
+                    "name": "Accept",
+                    "value": "*/*",
+                    "isDisabled": true
+                },
+                {
+                    "name": "User-Agent",
+                    "value": "Thunder Client (https://www.thunderclient.com)",
+                    "isDisabled": true
+                }
+            ],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"_id\":\"6572055050791707e42c6695\"\n}",
+                "form": []
+            },
+            "tests": []
+        },
+        {
+            "_id": "d4b5b083-1173-4686-b49f-b48ee2963997",
+            "colId": "6605d8d9-13f4-46c9-b6ef-5a90cbc0e544",
+            "containerId": "77bf9d3a-33fb-4c4a-bfd9-ca1e088301b2",
+            "name": "deleteStudentRegistrationForm",
+            "url": "http://localhost:3000/admin/deleteStudentRegistrationForm/657da47d3f9f1c844ba06943",
+            "method": "DELETE",
+            "sortNum": 130000,
+            "created": "2023-12-14T16:12:44.610Z",
+            "modified": "2023-12-16T13:22:50.984Z",
+            "headers": [
+                {
+                    "name": "Authorization",
+                    "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NTU5YzY2ODIzMDQ5YjliMDE5ODRmYjkiLCJpYXQiOjE3MDAzODIzMTJ9.qqjqvZDYssaCZpRgznlihh0ZSOLsKVhEY3PioahceAk"
+                },
+                {
+                    "name": "Accept",
+                    "value": "*/*",
+                    "isDisabled": true
+                },
+                {
+                    "name": "User-Agent",
+                    "value": "Thunder Client (https://www.thunderclient.com)",
+                    "isDisabled": true
+                }
+            ],
+            "params": [],
+            "tests": []
+        },
+        {
+            "_id": "75b9384f-cc7a-4586-bdc2-a0eb2228ca38",
+            "colId": "6605d8d9-13f4-46c9-b6ef-5a90cbc0e544",
+            "containerId": "77bf9d3a-33fb-4c4a-bfd9-ca1e088301b2",
+            "name": "takeNewAdmission",
+            "url": "http://localhost:3000/admin/takeNewAdmission/65806b6879b6d056c2f34f03",
+            "method": "PUT",
+            "sortNum": 140000,
+            "created": "2023-12-14T16:12:44.611Z",
+            "modified": "2023-12-18T15:55:46.842Z",
+            "headers": [
+                {
+                    "name": "Authorization",
+                    "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NTU5YzY2ODIzMDQ5YjliMDE5ODRmYjkiLCJpYXQiOjE3MDAzODIzMTJ9.qqjqvZDYssaCZpRgznlihh0ZSOLsKVhEY3PioahceAk"
+                },
+                {
+                    "name": "Accept",
+                    "value": "*/*",
+                    "isDisabled": true
+                },
+                {
+                    "name": "User-Agent",
+                    "value": "Thunder Client (https://www.thunderclient.com)",
+                    "isDisabled": true
+                }
+            ],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"iNum\":\"55\"\n}",
+                "form": []
+            },
+            "tests": []
+        },
+        {
+            "_id": "e4faa728-bc37-4d65-8794-777ac29d6efd",
+            "colId": "6605d8d9-13f4-46c9-b6ef-5a90cbc0e544",
+            "containerId": "77bf9d3a-33fb-4c4a-bfd9-ca1e088301b2",
+            "name": "deleteAdmin",
+            "url": "http://localhost:3000/admin/deleteAdmin/657b2e3b9d3c5529ba6bd18C",
+            "method": "DELETE",
+            "sortNum": 150000,
+            "created": "2023-12-14T16:31:50.944Z",
+            "modified": "2023-12-14T16:43:37.399Z",
+            "headers": [
+                {
+                    "name": "Authorization",
+                    "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NTU5YzY2ODIzMDQ5YjliMDE5ODRmYjkiLCJpYXQiOjE3MDAzODIzMTJ9.qqjqvZDYssaCZpRgznlihh0ZSOLsKVhEY3PioahceAk"
+                },
+                {
+                    "name": "Accept",
+                    "value": "*/*",
+                    "isDisabled": true
+                },
+                {
+                    "name": "User-Agent",
+                    "value": "Thunder Client (https://www.thunderclient.com)",
+                    "isDisabled": true
+                }
+            ],
+            "params": [],
+            "tests": []
+        },
+        {
+            "_id": "b0b2656d-bac6-493a-89d8-fb6901f52569",
+            "colId": "6605d8d9-13f4-46c9-b6ef-5a90cbc0e544",
+            "containerId": "77bf9d3a-33fb-4c4a-bfd9-ca1e088301b2",
+            "name": "getAdminList",
+            "url": "http://localhost:3000/admin/getAdminList",
+            "method": "POST",
+            "sortNum": 160000,
+            "created": "2023-12-14T16:51:02.169Z",
+            "modified": "2023-12-14T16:51:45.602Z",
+            "headers": [
+                {
+                    "name": "Authorization",
+                    "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NTU5YzY2ODIzMDQ5YjliMDE5ODRmYjkiLCJpYXQiOjE3MDAzODIzMTJ9.qqjqvZDYssaCZpRgznlihh0ZSOLsKVhEY3PioahceAk"
+                },
+                {
+                    "name": "Accept",
+                    "value": "*/*",
+                    "isDisabled": true
+                },
+                {
+                    "name": "User-Agent",
+                    "value": "Thunder Client (https://www.thunderclient.com)",
+                    "isDisabled": true
+                }
+            ],
+            "params": [],
+            "tests": []
+        },
+        {
+            "_id": "7dd2bd7a-c250-49e8-9fef-ddf7a7090cc2",
+            "colId": "6605d8d9-13f4-46c9-b6ef-5a90cbc0e544",
+            "containerId": "77bf9d3a-33fb-4c4a-bfd9-ca1e088301b2",
+            "name": "pushANewCourse",
+            "url": "http://localhost:3000/admin/pushANewCourse",
+            "method": "POST",
+            "sortNum": 170000,
+            "created": "2023-12-14T17:40:33.611Z",
+            "modified": "2023-12-14T18:29:10.255Z",
+            "headers": [
+                {
+                    "name": "Authorization",
+                    "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NTU5YzY2ODIzMDQ5YjliMDE5ODRmYjkiLCJpYXQiOjE3MDAzODIzMTJ9.qqjqvZDYssaCZpRgznlihh0ZSOLsKVhEY3PioahceAk"
+                },
+                {
+                    "name": "Content-Type",
+                    "value": "application/json"
+                },
+                {
+                    "name": "Accept",
+                    "value": "*/*",
+                    "isDisabled": true
+                },
+                {
+                    "name": "User-Agent",
+                    "value": "Thunder Client (https://www.thunderclient.com)",
+                    "isDisabled": true
+                }
+            ],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"name\":\"O Level\",\n  \"description\":\"This Is A Engeniering Oriented Course\",\n  \"duration\":\"500 hours\",\n  \"subjects\":[\n    {\"name\":\"Microsoft Office\"},\n    {\"name\":\"Photoshop\"},\n    {\"name\":\"corel Draw\"},\n    {\"name\":\"c\"},\n    {\"name\":\"c++\"},\n    {\"name\":\"html\"},\n    {\"name\":\"javascript\"},\n    {\"name\":\"fundamental Of Computer\"},\n    {\"name\":\"IOT\"},\n    {\"name\":\"Ai Robotics\"},\n   { \"name\":\"tally Erp 10.o\"}\n  ],\n  \"prerequisites\":\"12 Pass\"\n}",
+                "form": []
+            },
+            "tests": []
+        },
+        {
+            "_id": "9b423317-ac7d-493f-bf74-214543e35cca",
+            "colId": "6605d8d9-13f4-46c9-b6ef-5a90cbc0e544",
+            "containerId": "77bf9d3a-33fb-4c4a-bfd9-ca1e088301b2",
+            "name": "getCourseList",
+            "url": "http://localhost:3000/admin/getCourseList",
+            "method": "POST",
+            "sortNum": 180000,
+            "created": "2023-12-14T18:25:30.896Z",
+            "modified": "2023-12-14T18:26:14.225Z",
+            "headers": [
+                {
+                    "name": "Authorization",
+                    "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NTU5YzY2ODIzMDQ5YjliMDE5ODRmYjkiLCJpYXQiOjE3MDAzODIzMTJ9.qqjqvZDYssaCZpRgznlihh0ZSOLsKVhEY3PioahceAk"
+                },
+                {
+                    "name": "Accept",
+                    "value": "*/*",
+                    "isDisabled": true
+                },
+                {
+                    "name": "User-Agent",
+                    "value": "Thunder Client (https://www.thunderclient.com)",
+                    "isDisabled": true
+                }
+            ],
+            "params": [],
+            "tests": []
+        },
+        {
+            "_id": "7744f710-23d9-4e7d-abeb-742a53edc598",
+            "colId": "6605d8d9-13f4-46c9-b6ef-5a90cbc0e544",
+            "containerId": "77bf9d3a-33fb-4c4a-bfd9-ca1e088301b2",
+            "name": "generateCertificate",
+            "url": "http://localhost:3000/admin/generateCertificate",
+            "method": "POST",
+            "sortNum": 190000,
+            "created": "2023-12-16T11:20:26.102Z",
+            "modified": "2023-12-18T15:56:15.911Z",
+            "headers": [
+                {
+                    "name": "Authorization",
+                    "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NTU5YzY2ODIzMDQ5YjliMDE5ODRmYjkiLCJpYXQiOjE3MDAzODIzMTJ9.qqjqvZDYssaCZpRgznlihh0ZSOLsKVhEY3PioahceAk"
+                },
+                {
+                    "name": "Accept",
+                    "value": "*/*",
+                    "isDisabled": true
+                },
+                {
+                    "name": "User-Agent",
+                    "value": "Thunder Client (https://www.thunderclient.com)",
+                    "isDisabled": true
+                }
+            ],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"_id\":\"65806b6879b6d056c2f34f03\",\n  \"percentage\":\"88\"\n}",
+                "form": []
+            },
+            "tests": []
+        }
+    ]
+}

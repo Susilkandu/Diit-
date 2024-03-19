@@ -51,11 +51,10 @@ const SendOffer = () => {
   return (
     <form className="p-2" onSubmit={handleSubmit}>
       <div className="text-center">
-        <h1 className="fw-bolder text-gray-900 mb-4 text-primary">OFFERS FOR ENQUIRY NOW</h1>
+        <h1 className="fw-bolder text-gray-900 mb-4 text-primary">Notice form</h1>
       </div>
       <div className="offersTitle">
         <div className="d-flex d-flex justify-content-between">
-          <h4><b className="text-warning">Send</b> a new offer</h4>
           <span className='fw-medium'>Total offers <span className='text-success' id="Total">
             {offersLength}
           </span></span>
@@ -71,7 +70,7 @@ const SendOffer = () => {
         <div className="mb-3">
           <textarea
             className="form-control"
-            placeholder="Send a new offer....*"
+            placeholder="Type notice message"
             rows="4"
             value={message}
             onChange={(e) => setMessage(e.target.value)}
@@ -80,7 +79,7 @@ const SendOffer = () => {
         {error && <div className="alert alert-danger" role="alert">{error}</div>}
       </div>
       <div className="text-center my-2">
-        <button type="submit" className="small btn btn-primary">Update Now.</button>
+        <button type="submit" className="small btn btn-primary">Push</button>
       </div>
     </form>
   );

@@ -1,15 +1,17 @@
 const router = require('express').Router();
-const { addAdmin, loginAdmin, studentList, pushNotice, getAllNotice, updateNotice, deleteNotice, getAllQuery, updateIQueryStatus, deleteStudentRegistrationForm, takeNewAdmission, deleteAdmin, getAdminList, pushANewCourse, getCourseList, generateCertificate, verifyCertificate } = require('../Controller/adminController');
+const { addAdmin, loginAdmin, studentList, pushNotice, getAllNotice, updateNotice, deleteNotice, getAllQuery, updateIQueryStatus, deleteStudentRegistrationForm, takeNewAdmission, deleteAdmin, getAdminList, pushANewCourse, getCourseList, generateCertificate, verifyCertificate, adminProfile, deleteQuery, deleteCourse,pushPhoto,deletePhotos,getPhotos } = require('../Controller/adminController');
 const requireAdminLogin = require('../Middleware/requireAdminLogin');
 // Admin Routes
 router.post('/addAdmin', addAdmin);
 router.post('/login', loginAdmin);
-router.post('/getAdminList', requireAdminLogin, getAdminList);
+router.get('/adminProfile',requireAdminLogin,adminProfile);
+router.get('/getAdminList', requireAdminLogin, getAdminList);
 router.delete('/deleteAdmin/:_id', requireAdminLogin, deleteAdmin)
 
 //Course Routes
 router.post('/pushANewCourse', requireAdminLogin, pushANewCourse);
 router.get('/getCourseList',requireAdminLogin,getCourseList);
+router.delete('/deleteCourse/:_id',requireAdminLogin,deleteCourse);
 
 // Student Routes
 router.post('/studentList', requireAdminLogin, studentList);
@@ -28,6 +30,11 @@ router.delete('/deleteNotice/:_id', requireAdminLogin, deleteNotice);
 
 // Query Routes
 router.get('/getAllQuery', requireAdminLogin, getAllQuery);
-router.put('/updateIQueryStatus', requireAdminLogin, updateIQueryStatus)
+router.put('/updateIQueryStatus', requireAdminLogin, updateIQueryStatus);
+router.delete('/deleteQuery/:_id',requireAdminLogin,deleteQuery);
+// Gallery Routes
+router.post('/pushPhoto',requireAdminLogin,pushPhoto);
+router.post('/getPhotos',getPhotos);
+router.delete('/deletePhoto/:_id',requireAdminLogin,deletePhotos);
 module.exports = router;
 

@@ -1,7 +1,6 @@
-import { Link, Routes, Route } from 'react-router-dom';
-import React, { useEffect, useState, useContext } from 'react';
-import { fetchStudentList } from '../../functions/library';
-import { UniversalContext } from '../../../context/universal';
+import { Link, useNavigate } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
+import {toast} from 'react-toastify';
 import { Modal, Button } from 'react-bootstrap';
 import AdmissionForm from '../../Admission/AdmissionForm';
 // import SearchBox from '../../Course/SearchBox';
@@ -13,7 +12,9 @@ import StudentModel from './StudentModel';
 import CreateNewCourse from './subComponent/CreateNewCourse';
 import OffersForm from '../SendOffer/SendOffer';
 import StudentDataBs from '../../Admission/StudentDataBs';
+import CourseList from '../UpdateData/CourseList';
 export default function Admin() {
+  let navigate = useNavigate();
   const [showModal, setShowModal] = useState(false);
   const handleModalClose = () => setShowModal(false);
   const handleModalShow = () => setShowModal(true);
@@ -25,10 +26,117 @@ export default function Admin() {
   const [regNum, setRegNum] = useState('');
   const [gnrCert, setGnrCert] = useState('');
   const [percentage, setPercentage] = useState('');
+  const [issueDate, setIssueDate] = useState(new Date());
   const [offersLength, setOffersLength] = useState(0);
   const [coursesLength, setCoursesLength] = useState(0);
+  const [adminData, setAdminData] = useState([]);
   const [error, setError] = useState(null);
+  const [adminList,setAdminList]=useState([]);
+  const [name, setName] = useState('');
+  const [uploadStatus, setUploadStatus] = useState(false);
+  const [image, setImage] = useState("");
+  const [photo, setPhoto] = useState("");
+  const [email, setEmail] = useState('');
+  const [nDob, setNDob] = useState(new Date())
+  const [mobile, setMobile] = useState('');
+  const [address, setAddress] = useState('');
+  const [aadhaar, setAadhaar] = useState('');
+  const [profession, setProfesssion] = useState('');
+  const [password, setPassword] = useState('');
+  const [rPassword, setRPassword] = useState('');
+  const [about, setAbout] = useState('');
+  
 
+
+  const dob = new Date(adminData.dob);
+
+  const uploadPhoto = () => {
+    if (image) {
+      const data = new FormData()
+      data.append("file", image)
+      data.append("upload_preset", "hridesh99!")
+      data.append("cloud_name", "draowpiml")
+      fetch('https://api.cloudinary.com/v1_1/draowpiml/image/upload', { method: 'post', body: data }).then(res => res.json())
+        .then(data => {
+          if (!data.error) {
+            setPhoto(data.url);
+            setUploadStatus(true);
+          }
+        })
+        .catch((error) => {
+          setMessage(error)
+        })
+    }
+  }
+
+  const RegisterAccount = async () => {
+    await fetch('http://localhost:3000/admin/addAdmin', {
+      method: "post",
+      headers: {
+        "content-type": "application/json",
+        "authorization": localStorage.getItem('aJwt')
+      },
+      body: JSON.stringify({
+        name: name,
+        email: email,
+        profilePic: photo,
+        dob: nDob,
+        mobileNumber: mobile,
+        address: address,
+        aadhaarNumber: aadhaar,
+        profession: profession,
+        about: about,
+        password: password
+      })
+    }).then(data => data.json())
+      .then((data) => {
+        if (data.error) {
+          toast.error(data.message);
+        }
+        else {
+          toast.success('Account Created');
+        }
+      })
+  }
+  const fetchAdminProfile = async () => {
+    await fetch('http://localhost:3000/admin/adminProfile', {
+      headers: {
+        'Authorization': localStorage.getItem('aJwt')
+      }
+    }).then(data => data.json())
+      .then((data) => {
+        if (data.error) {
+          toast.error(data.error);
+        }
+        else {
+          setAdminData(data);
+        }
+      }).catch((error) => {
+        toast.error(error);
+      })
+  }
+  const fetchAdminList = async () => {
+    await fetch('http://localhost:3000/admin/getAdminList', {
+      headers: {
+        "authorization": localStorage.getItem('aJwt')
+      }
+    }).then(data =>data.json())
+      .then((data) => {
+          setAdminList(data);
+      })
+  }
+  const deleteAdmin = async(_id)=>{
+    await fetch(`http://localhost:3000/admin/deleteAdmin/${_id}`,{
+      method:'delete',
+      headers:{
+        'authorization':localStorage.getItem('aJwt')
+      }
+    }).then(data=>data.json())
+    .then((data)=>{
+      document.getElementById(_id).remove();
+      toast.success(data.message);
+    })
+  }
   const getStudentList = async () => {
     const query = {};
     if (fullName != '' || fullName != 'undefined' || fullName != 'null') {
@@ -48,11 +156,13 @@ export default function Admin() {
     })
       .then(res => res.json())
       .then(data => {
-        if (!data.error) {
+        if (data.error) {
+          toast.error(data.error);
+        } else {
           setAllStudent(data);
         }
       }).catch((error) => {
-        console.log(error);
+        toast.error(error);
       })
   }
   const deleteStudentById = async () => {
@@ -65,11 +175,11 @@ export default function Admin() {
       }
     ).then(res => res.json())
       .then(data => {
-        alert(data.message);
+        toast.success(data.message);
         setdlSId('');
         getStudentList();
       }).catch((error) => {
-        console.log(error)
+        toast.error(error)
       })
   }
   const takeNewAdmission = async () => {
@@ -86,20 +196,21 @@ export default function Admin() {
       .then(res => res.json())
       .then((data) => {
         if (data.error) {
-          alert(data.error);
+          toast.error(data.error);
         }
         else {
           setIndexNum('');
           setTkAdmission('');
-          alert(data.message);
+          toast.success(data.message);
           showModal(false);
           getStudentList();
 
         }
       }).catch((error) => {
-        console.log(error);
+        alert(error);
       })
   }
+
   const generateCertificate = async () => {
     await fetch('http://localhost:3000/admin/generateCertificate', {
       method: 'post',
@@ -109,13 +220,14 @@ export default function Admin() {
       },
       body: JSON.stringify({
         _id: gnrCert,
-        percentage: percentage
+        percentage: percentage,
+        issueDate: issueDate
       })
     }).then(res => res.json())
       .then((data) => {
         if (data.error) {
           setShowModal(false);
-          alert(data.error);
+          (data.error);
         }
         else {
           setShowModal(false);
@@ -164,6 +276,7 @@ export default function Admin() {
 
     fetchCoursesLength();
   }, []);
+
 
 
   //--------------------------Start Show Hide -------------------//
@@ -307,18 +420,21 @@ export default function Admin() {
                     <div id="AdmimPanel" className="accordion-collapse collapse" data-bs-parent="#AdminSection">
                       <div className="accordion-body">
                         <button className="nav-link w-100" data-bs-toggle="pill" data-bs-target="#AdminProfile"
-                          type="button" role="tab">
+                          type="button" role="tab" onClick={fetchAdminProfile}>
                           <i className="fa fa-user-circle" aria-hidden="true"></i> Profile
                         </button>
                         <button className="nav-link w-100" data-bs-toggle="pill" data-bs-target="#NewAccount"
                           type="button" role="tab">
                           <i className="bi bi-person-fill-lock"></i>  Create an account
                         </button>
-                        <button className="nav-link w-100" data-bs-toggle="pill" data-bs-target="#AdminLogin"
-                          type="button" role="tab">
-                          <i className="fa fa-arrow-circle-left" aria-hidden="true"></i> Log in
+                        <button className="nav-link w-100" data-bs-toggle="pill" data-bs-target="#AdminList"
+                          type="button" role="tab" onClick={fetchAdminList}>
+                          <i className="fa fa-arrow-circle-left" aria-hidden="true"></i> Admin List
                         </button>
-                        <button onClick={() => { localStorage.removeItem('aJwt') }} className="nav-link w-100" data-bs-toggle="pill"
+                        <button onClick={() => {
+                          navigate('/');
+                          localStorage.removeItem('aJwt');
+                        }} className="nav-link w-100" data-bs-toggle="pill"
                           type="button" role="tab">
                           <i className="fa fa-arrow-circle-o-right" aria-hidden="true"></i> Log Out
                         </button>
@@ -340,11 +456,10 @@ export default function Admin() {
                       <div className="accordion-body">
                         <button className="nav-link w-100" data-bs-toggle="pill" data-bs-target="#UpdateNewCourse"
                           type="button" role="tab">
-                          <i className="bi bi-cloud-arrow-up-fill"></i>  Update
+                          <i className="bi bi-cloud-arrow-up-fill"></i>  Push New
                         </button>
                         <button className="nav-link w-100" data-bs-toggle="pill" data-bs-target="#hhhh"
-                          type="button" role="tab">
-                          <i className="bi bi-trash3-fill"></i> Delete
+                          type="button" role="tab">Course List
                         </button>
                       </div>
                     </div>
@@ -364,11 +479,11 @@ export default function Admin() {
                       <div className="accordion-body">
                         <button className="nav-link w-100" data-bs-toggle="pill" data-bs-target="#OffersForNewStudent"
                           type="button" role="tab">
-                          <i className="bi bi-cloud-arrow-up-fill"></i>   For New Students
+                          <i className="bi bi-cloud-arrow-up-fill"></i>   Push New Notice
                         </button>
-                        <button className="nav-link small w-100" data-bs-toggle="pill" data-bs-target="#hhhh"
+                        <button className="nav-link small w-100" data-bs-toggle="pill" data-bs-target="#noticeArea"
                           type="button" role="tab">
-                          Datele Offers
+                          Notice
                         </button>
                       </div>
                     </div>
@@ -523,7 +638,7 @@ export default function Admin() {
                             <tr role="row" className="odd" id={student._id} key={student._id}>
                               <td>
                                 <div className="databsimg">
-                                  <img className="rounded-circle" src={student.photo} width="40" alt="Student Photo" />
+                                  <img className={student.gnCertificate == 1 ? "border border-success" : "rounded-circle"} src={student.photo} width="40" alt="Student Photo" />
                                 </div>
                               </td>
                               <td className="fw-medium small text-uppercase">
@@ -601,6 +716,7 @@ export default function Admin() {
                               </>) : gnrCert ?
                                 (<>
                                   <input type="number" maxLength={3} className='form-control' placeholder='Enter Percentage' onChange={(e) => { setPercentage(e.target.value) }} />
+                                  <input type="date" maxLength={3} className='form-control' onChange={(e) => { setIssueDate(e.target.value) }} />
                                   <Button variant="secondary" onClick={handleModalClose}>
                                     <i className="bi bi-trash"></i>
                                   </Button>
@@ -715,11 +831,6 @@ export default function Admin() {
                             </div>
                             <span className='text-danger fw-medium'>Provide to all the instituion  certificate ,
                               Drishtee is registered under the organization.</span>
-                            <div className="input-group form-control bg-primary-subtle my-2">
-                              <input type="file" accept="image/*" className="form-control my-2 float-start"
-                                id="choose-file" onChange={handleFileChange} />
-                              <button className='btn btn-sm btn-warning rounded-2 mx-2'>Send</button>
-                            </div>
                             <div className="my-3">
                               <textarea className="form-control" placeholder='Caption of AFFILIATIONS message....' rows="4"></textarea>
                             </div>
@@ -744,7 +855,7 @@ export default function Admin() {
                   <form className="row container my-1 py-5 g-3 align-items-center">
                     <div className="col-12 d-flex justify-content-around px-md-5 p-0">
                       <button type="button" className="btn btn-primary" onClick={handleNewButtonClick}>
-                        New <i className="bi bi-plus-circle "></i>
+                        New Btn <i className="bi bi-plus-circle "></i>
                       </button>
                     </div>
                     <div className={`col-lg-5 col-md-10 m-auto mt-3  m-auto my-4 ${showInput ? '' : ' d-none'}`}>
@@ -773,26 +884,26 @@ export default function Admin() {
                               <div className="col-md-8  border-bottom ">
                                 <div className="about-text">
                                   <div className="row">
-                                    <h1 className='fw-bolder text-primary'>Mr. Ajay Tiwari</h1>
+                                    <h1 className='fw-bolder text-primary'>{adminData.name}</h1>
                                     <hr />
                                     <div className="col-6">
                                       <div className="media">
                                         <label>Birthday</label>
-                                        <p>4th april 1998</p>
+                                        <p>{dob.toDateString()}</p>
                                       </div>
                                       <div className="media">
                                         <label>Address</label>
-                                        <p>California, USA</p>
+                                        <p>{adminData.address}</p>
                                       </div>
                                     </div>
                                     <div className="col-6">
                                       <div className="media">
                                         <label>E-mail</label>
-                                        <p>info@domain.com</p>
+                                        <p>{adminData.email}</p>
                                       </div>
                                       <div className="media">
                                         <label>Profession</label>
-                                        <p>	Lawyer</p>
+                                        <p>{adminData.profession}</p>
                                       </div>
                                     </div>
                                   </div>
@@ -800,15 +911,14 @@ export default function Admin() {
                               </div>
                               <div className="col-md-4  d-flex text-center flex-column">
                                 <div className="about-avatar">
-                                  <img src="images/team/team-1.png" alt="Ajay Tiwary" />
+                                  <img src={adminData.profilePic} alt="Ajay Tiwary" />
                                 </div>
                               </div>
                             </div>
                           </div>
                           <div className="px-4 pb-5 bg-body-tertiary">
                             <h3 className="dark-color fw-bolder text-warning">About Me</h3>
-                            <h6 className="theme-color ">A Lead UX &amp; UI designer based in DIIT</h6>
-                            <p>I <span className='bg-warning-subtle '>design and develop </span> services for customers of all sizes, specializing in creating stylish, modern websites, web services and online stores. My passion is to design digital user experiences through the bold interface and meaningful interactions.</p>
+                            <p>{adminData.about}</p>
                           </div>
                         </section>
                       </div>
@@ -822,54 +932,51 @@ export default function Admin() {
                         <div className="text-center">
                           <h1 className="h2 fw-bold text-gray-900 mb-4 text-primary">Create Account!</h1>
                         </div>
-                        <form className="user">
+                        <div className="user">
                           <div className="form-group row my-2">
-                            <div className="col-md-4 mb-3 mb-sm-0 input-group w-50">
-                              <input type="file" className="form-control form-control mx-0 px-0" />
-                              <button type='button' className='btn btn-sm btn-primary'>Send</button>
-                            </div>
                             <div className="col-sm-6 mb-3 mb-sm-0 ">
-                              <input type="text" className="form-control form-control" placeholder="Owner's Name" />
-                            </div>
-                          </div>
-                          <div className="form-group row my-2">
-                            <div className="col-sm-6">
-                              <input type="text" className="form-control form-control" placeholder="Address" />
+                              <input type="text" className="form-control form-control" onChange={(e) => { setName(e.target.value) }} value={name} placeholder="Enter Name" />
                             </div>
                             <div className="col-sm-6">
-                              <input type="text" className="form-control form-control" placeholder="Profession" />
+                              <input type="email" className="form-control form-control" onChange={(e) => { setEmail(e.target.value) }} value={email} placeholder="Email" />
                             </div>
-                          </div>
-                          <div className="form-group row my-2">
-                            <div className="col-sm-6 mb-3 mb-sm-0">
-                              <input type="date" className="form-control form-control" placeholder="Date of Birth" />
-                            </div>
-                            <div className="col-sm-6">
-                              <input type="number" className="form-control form-control" placeholder="Contact" />
-                            </div>
-                          </div>
-                          <div className="form-group">
-                            <input type="email" className="form-control form-control" placeholder="Email Address....*" />
-                          </div>
-                          <div className="form-group row my-2">
-                            <div className="col-sm-6 mb-3 mb-sm-0">
-                              <input type="number" className="form-control form-control" placeholder="Password....*" />
+                            <div className="input-group mb-3"> <i className="bi bi-image input-group-text "></i> <input
+                              className="form-control form-control-sm py-2 " id="formFileSm" type="file"
+                              onChange={(event) => { setImage(event.target.files[0]); setUploadStatus(false) }} />
+                              {uploadStatus ? <span >Uploaded</span> : <button className="btn btn-primary btn-small"
+                                onClick={uploadPhoto}>Upload Now</button>}
                             </div>
                             <div className="col-sm-6">
-                              <input type="number" className="form-control form-control" placeholder="Repeat Password....*" />
+                              <input type="date" className="form-control form-control" onChange={(e) => { setNDob(e.target.value) }} placeholder="Date Of Birth" />
                             </div>
+                            <div className="col-sm-6">
+                              <input type="Number" className="form-control form-control" onChange={(e) => { setMobile(e.target.value) }} value={mobile} placeholder="Mobile Number" />
+                            </div>
+                            <div className="col-sm-6">
+                              <input type="text" className="form-control form-control" onChange={(e) => { setAddress(e.target.value) }} value={address} placeholder="Address" />
+                            </div>
+                            <div className="col-sm-6">
+                              <input type="text" maxLength={12} className="form-control form-control" onChange={(e) => { setAadhaar(e.target.value) }} value={aadhaar} placeholder="12 digit Aadhaar Number" />
+                            </div>
+                            <div className="col-sm-6">
+                              <input type="text" className="form-control form-control" onChange={(e) => { setProfesssion(e.target.value) }} value={profession} placeholder="Profession" />
+                            </div>
+                            <div className="form-group row my-2">
+                              <div className="col-sm-6 mb-3 mb-sm-0">
+                                <input type="text" className="form-control form-control" onChange={(e) => { setPassword(e.target.value) }} value={password} placeholder="Password....*" />
+                              </div>
+                              <div className="col-sm-6">
+                                <input type="text" className="form-control form-control" onChange={(e) => { setRPassword(e.target.value) }} value={rPassword} placeholder="Repeat Password....*" />
+                              </div>
+                              <div className="w-10">
+                                <input type="text" className="form-control form-control" onChange={(e) => { setAbout(e.target.value) }} value={about} placeholder="Write About" />
+                              </div>
+                            </div>
+                            <button type='button' className="btn btn-primary w-100 my-2 py-2 rounded-pill" onClick={RegisterAccount}>
+                              Register Account
+                            </button>
                           </div>
-                          <a href="login.html" className="btn btn-primary w-100 my-2 py-2 rounded-pill">
-                            Register Account
-                          </a>
-                          <hr />
-                          <a href="index.html" className="btn btn-danger w-100 my-2 py-2 rounded-pill">
-                            <i className="fa fa-google" aria-hidden="true"></i> Register with Google
-                          </a>
-                          <a href="index.html" className="btn fbColor text-white  w-100 my-2 py-2 rounded-pill"> <i
-                            className="fa fa-facebook" aria-hidden="true"></i>  Register with Facebook
-                          </a>
-                        </form>
+                        </div>
                         <hr />
                         <div className="text-center">
                           <a className="small" href="#">Forgot Password?</a>
@@ -881,28 +988,40 @@ export default function Admin() {
                     </div>
                   </div>
                 </div>
-                <div className="tab-pane fade" id="AdminLogin" role="tabpanel" tabIndex="0">
+                <div className="tab-pane fade" id="AdminList" role="tabpanel" tabIndex="0">
                   <div className="row myflex d-flex justify-content-center py-5">
-                    <div className="col-12 col-md-6 bg-white py-3 myshadow">
-                      <div>
-                        <h3 className="text-center text-primary">Welcome Back!</h3>
-                        <div className="mb-3">
-                          <input type="email" className="form-control" placeholder="Enter User's id" />
-                        </div>
-                        <div className="mb-3">
-                          <input type="number" className="form-control" placeholder="Password" />
-                        </div>
-                        <button type="submit" className="btn btn-primary w-100 rounded-pill">Log in</button>
-                        <hr />
-                        <div className="text-center">
-                          <a className="nav-link text-primary" href="#"> <small>Forget Password</small> </a>
-                        </div>
-                        <div className="text-center">
-                          <a className="nav-link text-primary" href="#"> <small> Create an Account!</small>
-                          </a>
-                        </div>
-                      </div>
-                    </div>
+                  <table>
+                    <tbody>
+                      <tr>
+                        <th>Profile</th>
+                        <th>NAME</th>
+                        <th>Email</th>
+                        <th>Contact</th>
+                        <th>UIDAI NO.</th>
+                        <th>Addres</th>
+                        <th>Profession</th>
+                        <th>Generated At</th>
+                        <th>Delete</th>
+                      </tr>
+                      {
+                        (adminList.length>0) && adminList.map((admin) => {
+                          return (
+                            <tr id={admin._id}>
+                              <td ><img style={{width:"40px"}} src={admin.profilePic} alt="Loading.." /></td>
+                              <td>{admin.name}</td>
+                              <td>{admin.email}</td>
+                              <td>{admin.mobileNumber}</td>
+                              <td>{admin.aadhaarNumber}</td>
+                              <td>{admin.address}</td>
+                              <td>{admin.profession}</td>
+                              <td>{admin.createdAt}</td>
+                              <td onClick={()=>{deleteAdmin(admin._id)}}><button><i class="bi bi-trash3-fill"></i></button></td>
+                            </tr>
+                          )
+                        })
+                      }
+                    </tbody>
+                  </table>
                   </div>
                 </div>
                 <div className="tab-pane fade" id="AdminProfile" role="tabpanel" tabIndex="0">
@@ -984,6 +1103,9 @@ export default function Admin() {
                   <CreateNewCourse />
                 </div>
                 <div className="tab-pane fade mx-2" id="hhhh" role="tabpanel" >
+                  <CourseList />
+                </div>
+                <div className="tab-pane fade mx-2" id="noticeArea" role="tabpanel" >
                   <UpdateCourse />
                 </div>
                 <div className="tab-pane fade" id="OffersForNewStudent" role="tabpanel">

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-
+import {toast} from 'react-toastify';
 export default function CreateNewCourse() {
     const [courseTitle, setCourseTitle] = useState('');
     const [courseDescription, setCourseDescription] = useState('');
@@ -30,15 +30,15 @@ export default function CreateNewCourse() {
             .then(res => res.json())
             .then((data) => {
                 if (data.error) {
-                    setError(data.error);
+                    toast.error(data.error);
                 } else {
                     setError('');
-                    alert(data.message);
+                    toast.success(data.message);
                     resetForm();
                 }
             })
             .catch((error) => {
-                console.log(error);
+                toast.error(error);
             });
     };
 

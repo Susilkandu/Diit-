@@ -36,7 +36,7 @@ const Verification = () => {
       const date = new Date(dateString);
       const day = date.getDate().toString().padStart(2, '0');
       const month = (date.getMonth() + 1).toString().padStart(2, '0'); // Months are zero-based
-      const year = date.getFullYear().toString().slice(-2); // Get last two digits of the year
+      const year = date.getFullYear().toString() // Get last two digits of the year
       return `${day}/${month}/${year}`;
    };
 
@@ -252,7 +252,7 @@ const Verification = () => {
             </div>
 
             {
-               stdData &&
+               stdData.details &&
                (<div className='mt-5 user-select-none' >
                   <div id="printResult">
                      <div className="m-1 px-2 certificate" style={{ background: '#00062B', border: "15px solid #00062B" }}>
@@ -302,16 +302,14 @@ const Verification = () => {
                                  </div>
                                  <ul className='px-lg-3 d-flex flex-wrap p-0  m-0'>
                                     <p className='m-0 p-0 pe-2 '> <b>Modulus Covered:</b> </p>
+                                    {
+                                       stdData?.details?.subjects?.map((subjectGroup) =>
+                                          subjectGroup.map((subject) => (
+                                             <li key={subject._id}>{subject.name}</li>
+                                          ))
+                                       )
+                                    }
                                     <li>MS. Windows</li>
-                                    <li>MS. Word</li>
-                                    <li>MS. PowerPoint</li>
-                                    <li>MS. Excel</li>
-                                    <li>MS. Access</li>
-                                    <li>Tally 9.2 with inventory & Taxation</li>
-                                    <li>HTML</li>
-                                    <li>CSS</li>
-                                    <li>JavaScript</li>
-                                    <li>Bootstrap</li>
                                  </ul>
 
                                  <table className='w-100 table-responsive m-0 p-0 mt-5'>

@@ -2,6 +2,8 @@ import { Link } from "react-router-dom";
 import { useState, useEffect } from 'react';
 import submitBtn from '/images/icon/submitBtn.png'
 import Time from "../Time/Time";
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 const AdmissionForm = (() => {
   const [uploadStatus, setUploadStatus] = useState(false);
   const [submitEnabled, setSubmitEnabled] = useState(false);

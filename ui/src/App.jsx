@@ -2,7 +2,7 @@ import {
   Routes,
   Route,
 } from "react-router-dom";
-import { useState } from "react";
+import { useState ,Suspense, lazy} from "react";
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Home from "./Components/HomePage/Home";
@@ -10,7 +10,7 @@ import "./App.css";
 import "./MediaQuery.css";
 import { UniversalContext } from "./context/universal";
 import { adminContext } from "./context/admin"
-import Admin from "./Components/Admin/MainAdminPage/Admin";
+const Admin = lazy(()=>import("./Components/Admin/MainAdminPage/Admin"));
 import Header from "./Components/Header/Header";
 import About from "./Components/About/About";
 import Branch from "./Components/Branch/Branch";
@@ -73,7 +73,7 @@ function App() {
 
 
           <Route exact path="*" Component={Errors} />
-          <Route path="/admin" element={<adminContext.Provider value={{ setAllStudent, allStudent }}><Admin /></adminContext.Provider>} />
+          <Route path="/admin" element={<adminContext.Provider value={{ setAllStudent, allStudent }}><Suspense fallback={<center>Loading</center>}><Admin /></Suspense></adminContext.Provider>} />
         </Routes>
         <ToastContainer />
       </UniversalContext.Provider>

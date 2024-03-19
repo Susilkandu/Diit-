@@ -1,7 +1,7 @@
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const JWTKEYS = process.env.JWTKEYS;
-const { notice, admin, course } = require("../Model/admin");
+const { notice, admin, course, gallery } = require("../Model/admin");
 const { student, enquiry, certificate } = require("../Model/student");
 
 // Student Controller
@@ -19,7 +19,7 @@ const studentList = (async (req, res) => {
             res.json(result)
         })
     } catch (error) {
-        res.json({ message: "Some Internal Error Occured", mError: error });
+        res.json({ error: "Some Internal Error Occured", mError: error });
     }
 })
 const takeNewAdmission = (async (req, res) => {
@@ -52,6 +52,7 @@ const takeNewAdmission = (async (req, res) => {
             })
         }
     } catch (error) {
+        console.log(error)
         res.json({ message: "Some Internal Error Occured", mError: error });
     }
 })
@@ -81,8 +82,8 @@ const deleteStudentRegistrationForm = (async (req, res) => {
 // Student Certificate Controllers
 const generateCertificate = (async (req, res) => {
     try {
-        const { _id, percentage } = req.body;
-        if (!_id || !percentage) {
+        const { _id, percentage, issueDate } = req.body;
+        if (!_id || !percentage || !issueDate) {
             return res.status(404).json({ message: "Student Id and Percentage boath are Required" });
         }
         else {
@@ -93,14 +94,15 @@ const generateCertificate = (async (req, res) => {
             else {
                 const newCertificate = new certificate({
                     student: _id,
-                    completationDate: Date.now(),
+                    completationDate: issueDate,
                     percentage: percentage,
                     regNum: data.regNum
                 });
                 await newCertificate.save().then(async (data) => {
-                    await student.findByIdAndUpdate(_id, { $addToSet: { gnCertificate: '1' } });
+                    await student.findByIdAndUpdate(_id, { gnCertificate: '1' });
                     return res.status(200).json({ message: "Certificate Generated Successfully" });
                 }).catch((error) => {
+                    console.log(error)
                     return res.status(500).json({ message: "Some Error Occured While Generating Certificate", mError: error });
                 });
             }
@@ -153,23 +155,22 @@ const verifyCertificate = (async (req, res) => {
 // Admin Controller
 const addAdmin = (async (req, res) => {
     try {
-        const { name, email, profilePic, dob, mobileNumber, password } = req.body;
-        if (!name || !email || !profilePic || !dob || !mobileNumber || !password) {
+        const { name, email, profilePic, dob, mobileNumber, address, profession, about, aadhaarNumber, password } = req.body;
+        if (!name || !email || !profilePic || !dob || !mobileNumber || !address || !profession || !about || !aadhaarNumber || !password) {
             return res.json({ error: "Please Add All Fields" });
         } else {
             bcrypt.hash(password, 9).then(async (hashedPassword) => {
                 const adminData = new admin({
-                    name, email, profilePic, dob, mobileNumber, password: hashedPassword
+                    name, email, profilePic, dob, mobileNumber, address, profession, about, aadhaarNumber, password: hashedPassword
                 });
                 await adminData.save().then((data) => {
                     const token = jwt.sign({ _id: data._id }, process.env.JWTKEYS);
-                    res.json(token);
+                    return res.json({ token: token });
                 }).catch((error) => {
-                    // res.json({ error: `${JSON.stringify(error.keyValue)} is Already Exist` });
-                    console.log(error)
+                    return res.json({ message: "Some Error Occured", error: error })
                 })
             }).catch((error) => {
-                res.json({ error: "Some Internal Error Occured", mError: error });
+                return res.json({ error: "Some Internal Error Occured", mError: error });
             })
         }
     } catch (error) {
@@ -204,14 +205,37 @@ const loginAdmin = (async (req, res) => {
         return res.json({ error: "Some Error Occured", mError: error });
     }
 });
+const adminProfile = async (req, res) => {
+    try {
+        await admin.findById(req.user._id)
+            .select('-password')
+            .then((data) => {
+                if (!data) {
+                    return res.status(404).json({ error: 'Admin Data Not Found' })
+                }
+                else {
+                    return res.json(data);
+                }
+            })
+    } catch (error) {
+        console.log(error)
+        return res.status(500).json({ error: error })
+    }
+}
 const getAdminList = async (req, res) => {
     try {
-        await admin.find().select('name email mobileNumber').then((admins) => {
-            res.json(admins);
-        }).catch((error) => {
-            res.json({ message: "Server is Busy", error: error });
-        })
+        console.log(req.user)
+        if (req.user.root == true) {
+            await admin.find().select('-password').then((admins) => {
+                res.json(admins);
+            }).catch((error) => {
+                res.json({ message: "Server is Busy", error: error });
+            })
+        } else {
+            return res.status(401).json({ error: "You are Not Authorized" });
+        }
     } catch (error) {
+        console.log(error);
         res.status(500).json({ message: 'Server error', mError: error });
     }
 };
@@ -222,18 +246,20 @@ const deleteAdmin = async (req, res) => {
             return res.status(400).json({ message: 'Admin Id Required' });
         }
         else {
-            await admin.findByIdAndDelete(_id).then((result) => {
+            await admin.findOneAndDelete({ _id: _id, root: false }).then((result) => {
                 if (result == null) {
-                    res.status.json({ message: "This Admin Data Does Not Exist" });
+                    return res.status(401).json({ message: 'Root Admin Can not Be Delete' });
                 }
                 else {
-                    res.status(200).json({ message: 'Admin Account deleted successfully' });
+                    return res.status(200).json({ message: 'Admin Account deleted successfully' });
                 }
             }).catch((error) => {
-                res.status(404).json({ message: "Admin Data Does Not Exist", mError: error });
+                return res.status(404).json({ message: "Admin Data Does Not Exist", mError: error });
             })
+
         }
     } catch (error) {
+        console.log(error);
         res.status(500).json({ message: 'Server error', mError: error });
     }
 };
@@ -267,6 +293,24 @@ const getCourseList = (async (req, res) => {
         res.json({ error: "Some Internal Error Occured", mError: error });
     }
 });
+const deleteCourse = (async (req, res) => {
+    try {
+        const _id = req.params._id;
+        if (!_id) {
+            return res.status(400).json({ mError: "Course Id not found" });
+        } else {
+            await course.findByIdAndDelete(_id).then((data) => {
+                console.log(data);
+                return res.send(data);
+            }).catch((error) => {
+                return res.status(400).json({ message: "Some Internal Error Occured", mError: error });
+            })
+        }
+    } catch (error) {
+        console.log(error);
+        return res.json(500).json({ message: "Some Internal Error Occured", mError: error });
+    }
+})
 // Notice Controller
 const pushNotice = (async (req, res) => {
     try {
@@ -389,16 +433,71 @@ const deleteQuery = (async (req, res) => {
         return res.json({ error: "Some Internal Error Occured", mError: error });
     }
 });
-
+// Gallery Controller
+const pushPhoto = (async (req, res) => {
+    try {
+        const { name, url, category } = req.body;
+        if (!name || !url || !category) {
+            return res.status(400).json({ error: "Name ,url,category Parameter are Blank" });
+        } else {
+            const newPhoto = new gallery({
+                name: name,
+                category: category,
+                url: url
+            });
+            await newPhoto.save();
+            return res.status(201).json({ message: "Picture Inserted" });
+        }
+    } catch (error) {
+        console.log(error);
+        return res.status(500).json({ message: "Picture is Already exist", mError: error });
+    }
+})
+const getPhotos = (async (req, res) => {
+    try {
+        const { category } = req.body;
+        const query = {};
+        if (category !== undefined || category !== null || category !== '') {
+            query.category = { $regex: new RegExp(category, 'i') }
+        }
+        await gallery.find(query)
+            .then((photos) => {
+                if (photos.length < 1) {
+                    return res.status(404).json({ message: "No Photos Available" });
+                } else {
+                    return res.status(200).json(photos);
+                }
+            })
+    } catch (error) {
+        console.log(error);
+        return res.status(500).json({ error: "Some Internal Error Occured", mError: error });
+    }
+})
+const deletePhotos = (async (req, res) => {
+    const _id = req.params._id;
+    if (!_id) {
+        return res.status(400).json({ error: "Id not found" });
+    }
+    else {
+        await gallery.findByIdAndDelete(_id).then((data) => {
+            console.log(data)
+            return data == null ? res.status(200).json({ message: "Photo Not exits" }) : res.status(200).json({ message: "Photo Deleted" });
+        }).catch((error) => {
+            return res.status(400).json({ error: "Photos not available", mError: error });
+        })
+    }
+})
 module.exports = {
     // Admin Controller
     addAdmin,
     loginAdmin,
+    adminProfile,
     getAdminList,
     deleteAdmin,
     // Course Controller
     pushANewCourse,
     getCourseList,
+    deleteCourse,
 
     // Student Controller
     studentList,
@@ -416,7 +515,10 @@ module.exports = {
     // Query Controller
     getAllQuery,
     updateIQueryStatus,
-    deleteQuery
-
+    deleteQuery,
+    // Gallery Controller
+    pushPhoto,
+    getPhotos,
+    deletePhotos
 }
 

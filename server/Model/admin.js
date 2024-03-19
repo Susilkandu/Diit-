@@ -56,6 +56,23 @@ const adminSchema = new mongoose.Schema({
             message: 'Invalid Indian mobile number format',
         },
     },
+    address:{
+        type:String,
+        required:true
+    },
+    profession:{
+        type:String, 
+        required:true
+    },
+    about:{
+        type:String,
+        required:true
+    },
+    aadhaarNumber:{
+        type:Number,
+        unique:true,
+        required:true
+    },
     password: {
         type: String,
         required: true
@@ -90,11 +107,28 @@ const computerCourseSchema = new mongoose.Schema({
         default:'no'
     },
 }, { timestamps: true });
+const gallerySchema = new mongoose.Schema({
+    name:{
+        type:String,
+        required:true
+    },
+    category:{
+        type:String,
+        required:true
+    },
+    url:{
+        type:String,
+        required:true,
+        unique:true
+    }
+})
 const notice = mongoose.model('notice', noticeSchema);
 const admin = mongoose.model('admin', adminSchema);
 const course = mongoose.model('course',computerCourseSchema);
+const gallery= mongoose.model('gallery',gallerySchema);
 module.exports = {
     notice,
     admin,
-    course
+    course,
+    gallery
 }

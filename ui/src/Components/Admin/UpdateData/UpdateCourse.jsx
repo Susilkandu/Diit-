@@ -1,56 +1,78 @@
-import React, { useState } from 'react';
-
+import React, { useState, useEffect } from 'react';
 export default function UpdateCourse() {
     const [showInput, setShowInput] = useState(false);
-    const handleNewButtonClick = () => {
-        setShowInput(!showInput); // Toggle the state
-    };
-
-    const handleFileChange = (event) => {
-        const files = event.target.files;
-        if (files.length > 0) {
-            const selectedFile = files[0];
-            if (selectedFile.size <= 50 * 1024) {
-                const fileReader = new FileReader();
-                fileReader.onload = () => {
-                    setImgPreview(fileReader.result);
-                    setError("");
-                };
-
-                fileReader.readAsDataURL(selectedFile);
-            } else {
-                setImgPreview("");
-                setError("Upload only 50 KB smaller image.");
+    const [id,setId] = useState('');
+    const [notice, setNotice] = useState([]);
+    const [title,setTitle]=useState('');
+    const [nMessage,setNewMessage]=useState('');
+    const fetchNotice = async () => {
+        await fetch('http://localhost:3000/admin/getAllNotice', {
+            method: "get"
+        }).then(data => data.json())
+            .then((data) => {
+                setNotice(data);
+            })
+    }
+    const deleteNotice = async (_id) => {
+        await fetch(`http://localhost:3000/admin/deleteNotice/${_id}`, {
+            method: "delete",
+            headers: {
+                "Authorization": localStorage.getItem('aJwt')
             }
-        }
-    };
+        }).then(data => data.json())
+            .then((data) => {
 
+                fetchNotice();
+            })
+    }
+    const updateNotice = async (_id) => {
+        await fetch(`http://localhost:3000/admin/updateNotice`, {
+            method: "put",
+            headers: {
+                "Content-Type": "application/json",
+                'Authorization':localStorage.getItem('aJwt')
+            },
+            body: JSON.stringify({ _id: _id, title: title, nMessage: nMessage })
+        }).then(data => data.json())
+            .then((data) => {
+                setShowInput(false)
+                fetchNotice();
+            })
+    }
+    useEffect(() => {
+        fetchNotice();
+    }, [])
     return (
-        <div>
-            <div className="mx-0 px-0">
-                <div className="row mb-5">
-                    <div className="row container my-1 py-5 g-3 align-items-center">
-                        <div className="col-12 d-flex justify-content-around px-md-5 p-0">
-                            <button type="button" className="btn btn-primary" onClick={handleNewButtonClick}>
-                                New <i className="bi bi-plus-circle "></i>
-                            </button>
-                        </div>
-                        <div className={`col-lg-5 col-md-10 m-auto mt-3 m-auto my-4 shadow p-5${showInput ? '' : ' d-none'}`}>
-                            <div className="input-group">
-                                <input type="text" name='text' className="form-control" />
-                                <button type='button' className='btn btn-warning'> <i className="bi bi-upload"></i> Send</button>
-                            </div>
-                            <div className="mb-3">
-                                <label htmlFor="" className="form-label"></label>
-                                <textarea className="form-control" name="" id="" rows="3"></textarea>
-                            </div>
-                            <div className="text-center">
-                                <button className='btn btn-primary'>Upload</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+        <>
+            <table>
+                <tbody>
+                    <tr>
+                        <th>Title</th>
+                        <th>Description</th>
+                        <th>Action</th>
+                    </tr>
+                    {
+                        notice && notice.map((notice, index) => {
+                            return (
+                                <tr key={index}>
+                                    <td>{notice.title}</td>
+                                    <td>{notice.nMessage}</td>
+                                    <td><button className="btn btn-primary" onClick={() => { setTitle(notice.title);
+                                        setNewMessage(notice.nMessage);
+                                        setId(notice._id);
+                                        setShowInput(true) }}><i className="bi bi-pencil-square">Edit</i></button></td>
+                                    <td><button className="btn btn-danger" onClick={() => { deleteNotice(notice._id) }}><i className="bi bi-trash-fill">Delete</i></button></td>
+                                </tr>
+                            )
+                        })
+                    }
+                </tbody>
+            </table>
+            {showInput && <div >
+                <input type="text" value={title} onChange={(e)=>setTitle(e.target.value)} placeholder='New Title' />
+                <input type="text" value={nMessage} onChange={(e)=>setNewMessage(e.target.value)} placeholder='New Description' />
+                <button className="btn btn-primary" onClick={()=>{updateNotice(id)}}>Update</button>
+            </div>}
+        </>
     );
 }
