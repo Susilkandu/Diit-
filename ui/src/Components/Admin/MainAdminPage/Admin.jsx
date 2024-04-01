@@ -13,6 +13,7 @@ import CreateNewCourse from './subComponent/CreateNewCourse';
 import OffersForm from '../SendOffer/SendOffer';
 import StudentDataBs from '../../Admission/StudentDataBs';
 import CourseList from '../UpdateData/CourseList';
+import ProgramPictures from './subComponent/Gallery/ProgramPictures';
 export default function Admin() {
   let navigate = useNavigate();
   const [showModal, setShowModal] = useState(false);
@@ -362,9 +363,9 @@ export default function Admin() {
                           type="button" role="tab">
                           <i className="fa fa-newspaper-o" aria-hidden="true"></i> Notification
                         </button>
-                        <button className="nav-link w-100" data-bs-toggle="pill" data-bs-target="#ProgramData"
+                        <button className="nav-link w-100" data-bs-toggle="pill" data-bs-target="#ProgramPictures"
                           type="button" role="tab">
-                          <i className="fa fa-picture-o" aria-hidden="true"></i> Program Pics
+                          <i className="fa fa-picture-o" aria-hidden="true"></i> Program Pictures
                         </button>
                       </div>
                     </div>
@@ -844,28 +845,7 @@ export default function Admin() {
                     </div>
                   </div>
                 </div>
-                <div className="tab-pane fade bg-primary my-2" id="ProgramData" role="tabpanel" tabIndex="0">
-                  <div className="col-12 m-0 p-0 " style={{ border: '1px solid #012C5', background: 'var(--card-bg)' }}>
-                    <div className="container text-center m-0 py-3 h2 fw-bold text-uppercase " style={{ color: 'rgb(255, 255, 255)' }}>
-                      <b style={{ letterSpacing: '1px', color: 'white' }}>
-                        Upload  <font color="red">Gallary Images</font>
-                      </b>
-                    </div>
-                  </div>
-                  <form className="row container my-1 py-5 g-3 align-items-center">
-                    <div className="col-12 d-flex justify-content-around px-md-5 p-0">
-                      <button type="button" className="btn btn-primary" onClick={handleNewButtonClick}>
-                        New Btn <i className="bi bi-plus-circle "></i>
-                      </button>
-                    </div>
-                    <div className={`col-lg-5 col-md-10 m-auto mt-3  m-auto my-4 ${showInput ? '' : ' d-none'}`}>
-                      <div className="input-group">
-                        <input type="file" name='file' className="form-control" />
-                        <button type='button' className='btn btn-warning'> <i className="bi bi-upload"></i> Send</button>
-                      </div>
-                    </div>
-                  </form>
-                </div>
+                <ProgramPictures className="tab-pane fade bg-primary my-2" id="ProgramPictures" role="tabpanel" tabIndex="0"/>
                 <div className="tab-pane fade mx-2" id="certificate" role="tabpanel">
                   <div className="mx-0 px-0">
                     <div className="row mb-5">

@@ -139,6 +139,7 @@ const verifyCertificate = (async (req, res) => {
                         return res.status(404).json({ error: "Course not found" });
                     }
                     else {
+                        details.description=crs.description;
                         details.subjects = [crs.subjects];
                         return res.status(200).json({ details });
                     }
